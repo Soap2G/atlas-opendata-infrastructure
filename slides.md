@@ -420,25 +420,23 @@ title: Migration
 
 :: content ::
 
-<div style="width: 80%; height: 500px;">
-    ```mermaid
-    architecture-beta
-        group common(db)[common]
-        group DIRAC(server)[DIRAC]
-        group DiracX(server)[DiracX]
+```mermaid
+architecture-beta
+    group common(db)[common]
+    group DIRAC(server)[DIRAC]
+    group DiracX(server)[DiracX]
 
-        service db(devicon:sqldeveloper)[Database] in common
-        service client(clarity:thin-client-solid)[Client] in DIRAC
-        service dips(server)[DIPS] in DIRAC
-        service fastapi(devicon:fastapi)[FastAPI] in DiracX
-        service clientx(clarity:thin-client-line)[Client] in DiracX
+    service db(devicon:sqldeveloper)[Database] in common
+    service client(clarity:thin-client-solid)[Client] in DIRAC
+    service dips(server)[DIPS] in DIRAC
+    service fastapi(devicon:fastapi)[FastAPI] in DiracX
+    service clientx(clarity:thin-client-line)[Client] in DiracX
 
-        db:B -- T:dips
-        db:B -- T:fastapi
-        dips:B -- T:client
-        fastapi:B -- T:clientx
-    ```
-</div>
+    db:B -- T:dips
+    db:B -- T:fastapi
+    dips:B -- T:client
+    fastapi:B -- T:clientx
+```
 
 
 ---
