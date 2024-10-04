@@ -1,0 +1,29 @@
+{
+  "name": "CHEP24_diracx_plenary",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "slidev build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fstagni/pres_CHEP24.git"
+  },
+  "keywords": [
+    "diracx",
+    "CHEP24",
+    "plenary"
+  ],
+  "author": "Federico Stagni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fstagni/pres_CHEP24/issues"
+  },
+  "homepage": "https://github.com/fstagni/pres_CHEP24#readme",
+  "description": "",
+  "devDependencies": {
+    "@iconify-json/clarity": "^1.2.0",
+    "@iconify-json/devicon": "^1.2.3"
+  }
+}
