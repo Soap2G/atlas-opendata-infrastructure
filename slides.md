@@ -357,13 +357,10 @@ color: gray-light
 
 # DiracX Web API
 
-<devicon-fastapi-wordmark />
-<devicon-swagger-wordmark />
 
-<ul class="list-image-none font-sans text-sm mx-auto">
-  <li>DIRAC Web APIs are developed using  FastAPI <span class="iconify" data-icon="devicon:fastapi-wordmark" data-inline="true"></span></li>
-  <li>Nicely documented in Swagger (or Redoc), this what you see on the right <span class="iconify" data-icon="devicon:swagger-wordmark" data-inline="false"></span></li>
-</ul>
+- DIRAC Web APIs are developed using  FastAPI <devicon-fastapi-wordmark class="text-2xl mx-2" />
+- Nicely documented in Swagger (or Redoc) <devicon-swagger-wordmark  class="text-2xl mx-2" />
+  - this what you see on the right
 
 
 &nbsp;
