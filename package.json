@@ -21,5 +21,8 @@
     "url": "https://github.com/fstagni/pres_CHEP24/issues"
   },
   "homepage": "https://github.com/fstagni/pres_CHEP24#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "slidev-theme-neversink": "^0.3.6"
+  }
 }
