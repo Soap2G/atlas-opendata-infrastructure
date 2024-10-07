@@ -357,8 +357,8 @@ color: gray-light
 
 # DiracX Web API
 
-<devicon:fastapi-wordmark />
-<devicon:swagger-wordmark />
+<devicon-fastapi-wordmark />
+<devicon-swagger-wordmark />
 
 <ul class="list-image-none font-sans text-sm mx-auto">
   <li>DIRAC Web APIs are developed using  FastAPI <span class="iconify" data-icon="devicon:fastapi-wordmark" data-inline="true"></span></li>
@@ -601,17 +601,31 @@ title: Extensions
 
 
 Dirac has to support different Communities with different workflows and requirements. Examples:
-- LHCb is a HEP experiment. Stores the metadata and provenance of every produced files in a LHCb-specific database (with an Oracle backend)
-  - --> [see talk in Track 3 on Monday](https://indico.cern.ch/event/1338689/contributions/6010069/)
-  - --> See also poster #461 on `LbMCSubmit` tool
-- Belle2 is a HEP experiment. Uses Rucio as data management solution.
-  - --> [see talk in Track 1 this afternoon](https://indico.cern.ch/event/1338689/contributions/6010888/)
-- CTAO is an Astrophysics experiment with radically different requirements (wrt to HEP exp.) on how to process its data 
-  - --> [see talk in Track 4 tomorrow](https://indico.cern.ch/event/1338689/contributions/6011028/)
-- HERD is astronomy and particle astrophysics experiment using dHTC for data managemnt
-  - --> [see talk in Track 4 tomorrow](https://indico.cern.ch/event/1338689/contributions/6011011/)
-- EGI use DIRAC as WMS, and EGI-CheckIn as indentity provider
-- WeNMR brings together complementary research teams in the structural biology and life science area 
+<ul class="text-sm">
+  <li>LHCb stores the metadata and provenance of every produced file in a LHCb-specific database (with an Oracle backend)
+    <ul class="text-xs ml-4">
+      <li>--> <a href="https://indico.cern.ch/event/1338689/contributions/6010069/" class="text-blue-600 hover:underline">see talk in Track 3 on Monday</a></li>
+      <li>--> See also poster #461 on <code>LbMCSubmit</code> tool</li>
+    </ul>
+  </li>
+  <li>Belle2 is a HEP experiment. Uses Rucio as a data management solution.
+    <ul class="text-xs ml-4">
+      <li>--> <a href="https://indico.cern.ch/event/1338689/contributions/6010888/" class="text-blue-600 hover:underline">see talk in Track 1 this afternoon</a></li>
+    </ul>
+  </li>
+  <li>CTAO has radically different requirements (compared to HEP experiments) on how to process its data.
+    <ul class="text-xs ml-4">
+      <li>--> <a href="https://indico.cern.ch/event/1338689/contributions/6011028/" class="text-blue-600 hover:underline">see talk in Track 4 tomorrow</a></li>
+    </ul>
+  </li>
+  <li>HERD is an astronomy and particle astrophysics experiment using dHTC for data management.
+    <ul class="text-xs ml-4">
+      <li>--> <a href="https://indico.cern.ch/event/1338689/contributions/6011011/" class="text-blue-600 hover:underline">see talk in Track 4 tomorrow</a></li>
+    </ul>
+  </li>
+  <li>EGI uses DIRAC as WMS, and EGI-CheckIn as an identity provider.</li>
+  <li>WeNMR brings together complementary research teams in the structural biology and life science area.</li>
+</ul>
 
 <span class="bg-cyan-100 text-cyan-600 p-4 border-l-6 border-2 border-cyan-400 rounded-lg pl-8 pr-8 w-full block">
     It is sometimes necessary to extend all Dirac(X) components (including Web and Pilot). DiracX aims to provide an easy way to do so.
