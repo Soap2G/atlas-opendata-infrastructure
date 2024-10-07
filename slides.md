@@ -91,6 +91,7 @@ title: history
 :: content ::
 
 ```mermaid
+%%{init: { 'logLevel': 'debug', 'theme': 'base', 'timeline': {'disableMulticolor': true}}}%%
 timeline
         section LHCb software
           around 2000 : MC production system: bash scripts running at production sites
@@ -353,22 +354,35 @@ url: https://diracx-cert.app.cern.ch/api/docs
 class: webAPI
 slide_info: false
 color: gray-light
+align: lm
 ---
 
 # DiracX Web API
 
 
-- DIRAC Web APIs are developed using  FastAPI <devicon-fastapi-wordmark class="text-2xl mx-2" />
-- Nicely documented in Swagger (or Redoc) <devicon-swagger-wordmark  class="text-2xl mx-2" />
-  - this what you see on the right
-
-
-&nbsp;
-&nbsp;
-
 <AdmonitionType type='caution' >
 What is on the right is the certification Web API, loaded live. Use with caution!
 </AdmonitionType>
+
+
+<ul class="text-sm">
+  <li>
+    DIRAC Web APIs with 
+    <devicon-fastapi-wordmark class="text-7xl align-middle inline-block mx-2"></devicon-fastapi-wordmark>
+  </li>
+  <li>
+    Nicely documented in 
+    <devicon-swagger-wordmark class="text-7xl align-middle inline-block mx-2"></devicon-swagger-wordmark>
+    <ul class="text-xs ml-4">
+      <li>--> this is what you see on the right</li>
+    </ul>
+  </li>
+  <li>
+    Authorization with "standard" <a href="https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow" class="text-blue-600 hover:underline">Authorization Code Flow</a> redirecting to IdP
+  </li>
+</ul>
+
+
 
 ---
 layout: side-title
@@ -378,6 +392,8 @@ titlewidth: is-2
 align: rm-lt
 title: CLI
 ---
+
+Authorization with "standard" <a href="https://auth0.com/docs/get-started/authentication-and-authorization-flow/device-authorization-flow" class="text-blue-600 hover:underline">Device Authorization Flow</a>
 
 
 :: title ::
@@ -431,24 +447,22 @@ url: https://diracx-cert.app.cern.ch
 class: webapp
 slide_info: false
 color: gray-light
+align: lm
 ---
 
 # DiracX web
 
-We are also rewriting the WebApp from scratch.
+We are also rewriting [the Web App](https://github.com/DIRACGrid/diracx-web) from scratch.
 
 Software stack:
-- NextJS
-- Material UI
-- TypeScript
-
-https://github.com/DIRACGrid/diracx-web
-
-&nbsp;
+- NextJS <devicon-nextjs-wordmark class="text-4xl align-middle inline-block mx-2" />
+- Material UI <devicon-materialui class="text-3xl align-middle inline-block mx-2" />
+- TypeScript <devicon-typescript class="text-3xl align-middle inline-block mx-2" />
 
 <AdmonitionType type='caution' >
 What is on the left is the certification WebApp, loaded live. Use with caution!
 </AdmonitionType>
+
 
 ---
 layout: default
@@ -484,11 +498,12 @@ title: tokens
 
 :: content ::
 
-- **Submitting pilots** : The computing elements right now prefer the tokens (DIRAC v8 does that already)
-- **Data access** : proxies. One day, will be token
-- **Verifying a user's identity** : 
+- **VO membership**: "in transition"
+- **Submitting pilots**: The computing elements right now prefer the tokens (DIRAC v8 does that already)
+- **Data access**: at least in WLCG, proxies. One day, will be token
+- **Verifying a user's identity** (internally to Dirac): 
+    - **DiracX** uses only tokens ([link to security model](https://github.com/DIRACGrid/diracx/blob/main/security_model.md))
     - **DIRAC** uses only X509 proxies and certificates to verify identities 
-    - **DiracX** uses only tokens
     - --> For a (long) while, **users will have both a token and proxy**.
 
 <AdmonitionType type='Note' >
@@ -496,19 +511,16 @@ DiracX delivers its own tokens, they are not the same tokens used for the Grid e
 </AdmonitionType>
 
 ---
-layout: top-title
+layout: standard
 color: gray-light
 align: lm
 title: interactions
 ---
 
-:: title ::
+<div style="text-align: right"> On proxies and tokens/2 </div>
 
-# On proxies and tokens/2
-
-:: content ::
-
-```mermaid {theme: 'neutral', scale: 0.4}
+```mermaid {theme: 'neutral', scale: 0.5}
+%%{init: { "theme": "forest" } }%%
 sequenceDiagram
     create actor U as User
     create participant DIRAC_ProxyManager
@@ -516,20 +528,20 @@ sequenceDiagram
     create participant VOMS
     DIRAC_ProxyManager->>VOMS: get proxy
     destroy VOMS
-    VOMS-->>DIRAC_ProxyManager: VOMS proxy
+    VOMS->>DIRAC_ProxyManager: VOMS proxy
+    DIRAC_ProxyManager-->>U: redirect to external IdP
     create participant IAM
-    DIRAC_ProxyManager->>IAM : get token
+    U->>IAM: Authorization Code Flow or Device Flow
     destroy IAM
-    IAM-->>DIRAC_ProxyManager: IAM token
+    IAM->>DIRAC_ProxyManager: IAM token
     destroy DIRAC_ProxyManager
-    DIRAC_ProxyManager-->>U: proxy+token
+    DIRAC_ProxyManager->>U: DIRAC proxy and DiracX token
     create participant DIRAC_service
-    U->>DIRAC_service: proxy
+    U->>DIRAC_service: DIRAC proxy
+    destroy DIRAC_service
     create participant DiracX_service
-    U->>DiracX_service: token
-    create participant StorageElement
-    DIRAC_service->>StorageElement: proxy
-    DiracX_service->>StorageElement: token
+    U->>DiracX_service: DiracX token
+    destroy DiracX_service
 ```
 
 
@@ -601,8 +613,9 @@ Dirac has to support different Communities with different workflows and requirem
 <ul class="text-sm">
   <li>LHCb stores the metadata and provenance of every produced file in a LHCb-specific database (with an Oracle backend)
     <ul class="text-xs ml-4">
-      <li>--> <a href="https://indico.cern.ch/event/1338689/contributions/6010069/" class="text-blue-600 hover:underline">see talk in Track 3 on Monday</a></li>
-      <li>--> See also poster #461 on <code>LbMCSubmit</code> tool</li>
+      <li>-->
+        <a href="https://indico.cern.ch/event/1338689/contributions/6010069/" class="text-blue-600 hover:underline">see talk in Track 3 on Monday</a> and poster #461 on <code>LbMCSubmit</code>
+      </li>
     </ul>
   </li>
   <li>Belle2 is a HEP experiment. Uses Rucio as a data management solution.
@@ -620,12 +633,13 @@ Dirac has to support different Communities with different workflows and requirem
       <li>--> <a href="https://indico.cern.ch/event/1338689/contributions/6011011/" class="text-blue-600 hover:underline">see talk in Track 4 tomorrow</a></li>
     </ul>
   </li>
-  <li>EGI uses DIRAC as WMS, and EGI-CheckIn as an identity provider.</li>
-  <li>WeNMR brings together complementary research teams in the structural biology and life science area.</li>
+  <li>EGI uses DIRAC as WMS, and EGI-CheckIn as an identity provider. Hosts (among others) WeNMR (structural biology and life science)</li>
 </ul>
 
-<span class="bg-cyan-100 text-cyan-600 p-4 border-l-6 border-2 border-cyan-400 rounded-lg pl-8 pr-8 w-full block">
-    It is sometimes necessary to extend all Dirac(X) components (including Web and Pilot). DiracX aims to provide an easy way to do so.
+<span class="bg-cyan-100 text-cyan-600 text-center p-4 border-l-6 border-2 border-cyan-400 rounded-lg pl-8 pr-8 w-full block">
+    It is sometimes necessary to extend all Dirac(X) components (including Web and Pilot). 
+    
+    DiracX aims to provide an easy way to do so.
 </span>
 
 
@@ -648,9 +662,10 @@ timeline
     May 2022 : DIRAC v8.0
     Oct 2023 : EOL DIRAC v7.3
              : First DiracX demo
-    Q4 2024  : DiracX ...
+    Q4 2024  : DIRAC v9.0.0a30
+             : DiracX v0.0.1a19
     Q1 2025  : DIRAC v9.0
-             : DiracX 0.1
+             : DiracX v0.1
              : can start using DiracX services
 
 ```
@@ -681,8 +696,14 @@ titlewidth: is-3
 
 ## The obvious ways:
 
-- tests: (as you could see we have a somewhat open test deployment infrastructure). You *can* try something out, and let us know!
-- code: https://github.com/DIRACGrid/diracx
+<ul class="text-sm">
+    <li>
+        tests: (as you could see we have a somewhat open test deployment infrastructure). Try something out, and let us know!
+    </li>
+    <li>
+        code: https://github.com/DIRACGrid/diracx
+    </li>
+</ul>
 
 ## Run the demo: 
 
@@ -690,13 +711,19 @@ titlewidth: is-3
 git clone https://github.com/DIRACGrid/diracx-charts
 diracx-charts/run_demo.sh  # do not do it now!
 ```
-
-&nbsp;
+ 
 
 ## Discuss:
-- **mattermost** : https://mattermost.web.cern.ch/diracx/
-- **meetings**: (almost) every week on Thursday morning (CET)
-- **hackathons**: we have been doing 2-days DiracX hackathons every quarter. At CERN. [Next one in January](https://indico.cern.ch/event/1458873/)
+<ul class="text-sm">
+  <li><strong>mattermost</strong>: <a href="https://mattermost.web.cern.ch/diracx/" class="text-blue-600 hover:underline">https://mattermost.web.cern.ch/diracx/</a></li>
+  <li><strong>meetings</strong>: (almost) every week on Thursday morning (CET)</li>
+  <li><strong>hackathons</strong>: we have been doing 2-days DiracX hackathons every quarter, at CERN
+    <ul class="text-xs ml-4">
+      <li>--> <a href="https://indico.cern.ch/event/1458873/" class="text-blue-600 hover:underline">Next one in January</a></li>
+    </ul>
+  </li>
+</ul>
+
 
 
 
@@ -832,4 +859,6 @@ Q/A
 
 --> It will probably be possible, but we do not know when.
 
-- ?
+- What is in a DiracX token (is it "special")?
+
+--> It carries the `dirac_properties` (which are the same as in current DIRAC)
