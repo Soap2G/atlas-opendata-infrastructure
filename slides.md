@@ -17,6 +17,7 @@ __ <a href="https://indico.cern.ch/event/1338689/" class="ns-c-iconlink"><mdi-op
 
 
 
+
 ---
 layout: section
 color: lime-light
@@ -55,26 +56,57 @@ color: gray-light
 ---
 
 <div style="display: flex; flex-wrap: wrap; justify-content: space-around; gap: 20px;">
-  <img id="DIRAC" src="/public/images/Juno.jpeg" alt="Juno" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/Belle2_logo.png" alt="Belle2" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/CTA.jpg" alt="CTA" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/ilc.png" alt="ILC" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/LHCb.png" alt="LHCb" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/nica.jpg" alt="nica" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/BES3.png" alt="BES3" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/GridPP-Logo.png" alt="gridPP" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/pierre-auger-logo.png" alt="pierre-auger" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/EGI.png" alt="EGI" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/cepc.png" alt="cepc" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/na62.jpeg" alt="na62" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/t2k.png" alt="t2k" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/WeNMR-logo.png" alt="weNMR" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/LogoHyperK.png" alt="hyperk" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/euclid.jpeg" alt="euclid" style="width: 80px;">
-  <img id="DIRAC" src="/public/images/LZ.png" alt="lz" style="width: 80px;">
+  <img id="Juno" src="/public/images/Juno.jpeg" alt="Juno" style="width: 90px;">
+  <img id="Belle2" src="/public/images/Belle2_logo.png" alt="Belle2" style="width: 90px;">
+  <img id="CTA" src="/public/images/CTA.jpg" alt="CTA" style="width: 90px;">
+  <img id="ilc" src="/public/images/ilc.png" alt="ILC" style="width: 90px;">
+  <img id="LHCb" src="/public/images/LHCb.png" alt="LHCb" style="width: 90px;">
+  <img id="nica" src="/public/images/nica.jpg" alt="nica" style="width: 90px;">
+  <img id="BES3" src="/public/images/BES3.png" alt="BES3" style="width: 90px;">
+  <img id="GriPP" src="/public/images/GridPP-Logo.png" alt="gridPP" style="width: 90px;">
+  <img id="PA" src="/public/images/pierre-auger-logo.png" alt="pierre-auger" style="width: 90px;">
+  <img id="EGI" src="/public/images/EGI.png" alt="EGI" style="width: 90px;">
+  <img id="cepc" src="/public/images/cepc.png" alt="cepc" style="width: 90px;">
+  <img id="na62" src="/public/images/na62.jpeg" alt="na62" style="width: 90px;">
+  <img id="t2k" src="/public/images/t2k.png" alt="t2k" style="width: 90px;">
+  <img id="weNMR" src="/public/images/WeNMR-logo.png" alt="weNMR" style="width: 90px;">
+  <img id="hyperk" src="/public/images/LogoHyperK.png" alt="hyperk" style="width: 90px;">
+  <img id="euclid" src="/public/images/euclid.jpeg" alt="euclid" style="width: 90px;">
+  <img id="LZ" src="/public/images/LZ.png" alt="lz" style="width: 90px;">
+  <img id="fcc" src="/public/images/fcc.png" alt="lz" style="width: 90px;">
 </div>
 
 
+---
+layout: top-title
+color: gray-light
+align: l
+title: history
+---
+
+:: title ::
+
+# DIRAC timeline
+
+:: content ::
+
+```mermaid
+timeline
+        section LHCb software
+          around 2000 : MC production system: bash scripts running at production sites
+          2002 : DIRAC2 <br> Rewritten in Python, using xml-rpc, interfacing to EDG
+          Data Challenge 04 : First successful grid usage ever.
+                            : First use of pilot jobs based WMS
+          2006-2007 : DIRAC3<br> Full rewriting, development of the DISET protocol -- still in use today!
+                    : the current DIRAC framework is still based on this work
+        section Open sourced, wider adoption
+          2008 : Large-ish reshuffling to become multi-VO
+               : LHCbDIRAC extension separated from Vanilla DIRAC code
+          2009 : CLIC community adopts DIRAC
+          2011 : France-Grilles is the first multi-VO DIRAC installation
+          2012 : Belle2, BES3, CTA adopt DIRAC
+          2021 : Python3 full support
+```
 
 
 ---
@@ -86,10 +118,10 @@ title: WMS
 
 :: title ::
 
-# Workload Management System
+# WMS: Workload Management System
 - Pull model based on Pilot jobs
 - Also "Push" solution for HPCs that do not support pilots (because of limited internet access).
-- Will integrate [CWL (Common Workflow Language)](https://www.commonwl.org) as a way of defining jobs (replacing JDL)
+- Will integrate [CWL (Common Workflow Language)](https://www.commonwl.org) as a way of defining jobs (replacing JDL) --> see poster #217
 
 :: content ::
 
@@ -126,23 +158,22 @@ titlewidth: is-5
 
 :: title ::
 
-# Data Management System
+# DMS: Data Management System
 It’s about **files**:​ placing, replicating, removing files​
 
 - there are **LFNs** (logical file names) → and users ONLY work with these​
 - **LFNs** are registered in *catalog(s)​*
     - where are the LFNs? (in the DIRAC File Catalog (DFC), or in Rucio)​
     - what are their metadata? (in the DFC, or in the LHCb Bookkeeping, or in AMGA)​
-- LFNs *may* have **PFNs**, stored in **SEs**.​
-- You can access those PFNs with several protocols.​
+- LFNs *may* have **PFNs**, stored in **SEs**, that can be accessed with several protocols.​
 
 :: content ::
 
 ```mermaid
 flowchart LR;
 DataManager((DataManager))
-    FileCatalog-->LFC_Service;
     FileCatalog-->DFC_Service;
+    FileCatalog-->Rucio;
     FileCatalog-->Transformation_Service;
     DataManager-->FileCatalog;
     DataManager-->StorageBase;
@@ -157,21 +188,21 @@ DataManager((DataManager))
 layout: side-title
 color: gray-light
 align: lm-lm  
-title: Productions
+title: TS
 ---
 
 :: title ::
 
 # Productions and Dataset management
 
-- A `production` is a *Data Processing transformation* (e.g. Simulation, Merge, DataReconstruction…). A Production creates jobs in the WMS (and re-sumbit them, and destroy them).​
+- A *Data Processing* **transformation** (e.g. Simulation, Merge, DataReconstruction...) creates jobs in the WMS (and re-sumbit them, and destroy them).​
 
-- (Unless you are using Rucio) a *Data Manipulation transformation* replicates, or remove, data from storage elements.
+- A *Data Manipulation* **transformation** replicates, or remove, data from storage elements.
 
 :: content ::
 
 <span class="bg-cyan-100 text-cyan-600 p-4 border-l-6 border-2 border-cyan-400 rounded-lg pl-8 pr-8 w-full block">
-    The **Transformation System (TS)** is used to automate common tasks related to production activities
+    The Transformation System (TS) is used to automate common tasks related to production activities. It can handle thousands of productions, millions of files and jobs.
 </span>
 
 &nbsp;
@@ -193,35 +224,34 @@ TransformationSystem((TransformationSystem))
 ```
 
 ---
-layout: top-title
+layout: top-title-two-cols
+align: c-lm-lm
 color: gray-light
-align: l
-title: history
+title: tech
 ---
+
 
 :: title ::
 
-# Brief history of DIRAC
+# Tech stack 
 
-:: content ::
+:: left :: 
 
-```mermaid
-timeline
-        section LHCb software
-          around 2000 : MC production system: bash scripts running at production sites
-          2002 : DIRAC2 <br> Rewritten in Python, using xml-rpc, interfacing to EDG
-          Data Challenge 04 : First successful grid usage ever.
-                            : First use of pilot jobs based WMS
-          2006-2007 : DIRAC3<br> Full rewriting, development of the DISET protocol -- still in use today!
-                    : the current DIRAC framework is still based on this work
-        section Open sourced, wider adoption
-          2008 : Large-ish reshuffling to become multi-VO
-               : LHCbDIRAC extension separated from Vanilla DIRAC code
-          2009 : CLIC community adopts DIRAC
-          2011 : France-Grilles is the first multi-VO DIRAC installation
-          2012 : Belle2, BES3, CTA adopt DIRAC
-          2021 : Python3 full support
-```
+- DIRAC is written in python3
+  - with the exception of the DIRAC Pilot, which needs to still be able to run with Python2
+- Services are exposed at urls like `dips://box.some.where:9132/WorloadManagement/`
+  - `dips` stands for "DIRAC protocol"
+- The DIRAC framework provides also "Agents" and "Executors" to animate the system
+- As backends, MySQL and OpenSearch are supported (for different purposes)
+
+:: right ::
+
+DIRAC also provides a WebApp
+
+<img id="WebApp" src="/public/images/WebApp.png">
+
+Implemented using `ExtJS`, and fully custom Python "bindings"
+
 
 ---
 layout: side-title
@@ -237,7 +267,7 @@ title: issues
 
 :: content ::
 
-<ul class="text-sm mx-auto">
+<ul class="list-image-none font-sans text-sm mx-auto">
     <li> complex, with high entrance bar</li>
     <li> somewhat cumbersome deployment</li>
     <li> late on “standards”
@@ -253,13 +283,47 @@ title: issues
     <li> no clear interface to a running DIRAC instance</li>
 </ul>
 
+
 ---
 layout: section
 color: cyan-light
----
+--- 
 
 ## DiracX,  the neXt DIRAC incarnation
 
+
+---
+layout: top-title-two-cols
+color: gray-light
+align: l-lm-lt
+title: requirements
+---
+
+<StickyNote color="gray-light" textAlign="center" width="260px" title="Developers and maintainers requirements" v-drag="[350,380,320,100]">
+Easy to test (will make it easier to code), but also modern, funny, and accessible to new developers
+</StickyNote>
+
+
+:: title ::
+
+# Minimal Requirements
+
+:: left ::
+
+## Communities/Users requirements
+
+- Ease of use, including ease of access
+- Fast and responsive interfaces
+- Scalable and flexible
+
+:: right ::
+
+## Administrator requirements
+
+- Ease of installation and update
+- Up-to-date documentation
+- Clear confguration
+- Ready-to-use dashboards
 
 ---
 layout: side-title
@@ -267,7 +331,7 @@ side: left
 color: gray-light
 titlewidth: is-5
 align: rm-lm
-title: CLI
+title: DiraX
 ---
 
 :: title ::
@@ -293,11 +357,20 @@ color: gray-light
 
 # DiracX Web API
 
-- DIRAC Web APIs are developed using FastAPI
-- Nicely documented in Swagger (or Redoc), this what you see on the right
+<devicon:fastapi-wordmark />
+<devicon:swagger-wordmark />
+
+<ul class="list-image-none font-sans text-sm mx-auto">
+  <li>DIRAC Web APIs are developed using  FastAPI <span class="iconify" data-icon="devicon:fastapi-wordmark" data-inline="true"></span></li>
+  <li>Nicely documented in Swagger (or Redoc), this what you see on the right <span class="iconify" data-icon="devicon:swagger-wordmark" data-inline="false"></span></li>
+</ul>
+
+
+&nbsp;
+&nbsp;
 
 <AdmonitionType type='caution' >
-What is on the right is the certification WebApp, loaded live. Use with caution!
+What is on the right is the certification Web API, loaded live. Use with caution!
 </AdmonitionType>
 
 ---
@@ -374,26 +447,11 @@ Software stack:
 
 https://github.com/DIRACGrid/diracx-web
 
+&nbsp;
+
 <AdmonitionType type='caution' >
 What is on the left is the certification WebApp, loaded live. Use with caution!
 </AdmonitionType>
-
-
-
----
-layout: top-title
-color: gray-light
-align: l
-title: tokens
----
-
-:: title ::
-
-# From X509 certs and proxies to tokens
-
-:: content ::
-
-DIRAC uses X509 certificates and proxies to verify identities. DiracX uses tokens. For a (long) while, **users will have both a token and proxy**.
 
 ---
 layout: default
@@ -402,6 +460,94 @@ color: gray-light
 
 # Architecture diagram
 
+
+
+---
+layout: quote
+color: sky-light
+quotesize: text-m
+authorsize: text-s
+author: 'Some of you out there'
+---
+
+"OK, but the Grid still uses proxies. 
+
+VOMS is alive!"
+
+---
+layout: top-title
+color: gray-light
+align: lm
+title: tokens
+---
+
+:: title ::
+
+# What are proxies and/or tokens needed for?
+
+:: content ::
+
+- **Submitting pilots** : The computing elements right now prefer the tokens (DIRAC v8 does that already)
+- **Data access** : proxies. One day, will be token
+- **Verifying a user's identity** : 
+    - **DIRAC** uses only X509 proxies and certificates to verify identities 
+    - **DiracX** uses only tokens
+    - --> For a (long) while, **users will have both a token and proxy**.
+
+<AdmonitionType type='Note' >
+DiracX delivers its own tokens, they are not the same tokens used for the Grid endpoints
+</AdmonitionType>
+
+---
+layout: top-title
+color: gray-light
+align: lm
+title: interactions
+---
+
+:: title ::
+
+# On proxies and tokens/2
+
+:: content ::
+
+```mermaid {theme: 'neutral', scale: 0.4}
+sequenceDiagram
+    create actor U as User
+    create participant DIRAC_ProxyManager
+    U->>DIRAC_ProxyManager: dirac-proxy-init
+    create participant VOMS
+    DIRAC_ProxyManager->>VOMS: get proxy
+    destroy VOMS
+    VOMS-->>DIRAC_ProxyManager: VOMS proxy
+    create participant IAM
+    DIRAC_ProxyManager->>IAM : get token
+    destroy IAM
+    IAM-->>DIRAC_ProxyManager: IAM token
+    destroy DIRAC_ProxyManager
+    DIRAC_ProxyManager-->>U: proxy+token
+    create participant DIRAC_service
+    U->>DIRAC_service: proxy
+    create participant DiracX_service
+    U->>DiracX_service: token
+    create participant StorageElement
+    DIRAC_service->>StorageElement: proxy
+    DiracX_service->>StorageElement: token
+```
+
+
+
+---
+layout: quote
+color: sky-light
+quotesize: text-m
+authorsize: text-s
+author: 'Again, some of you out there'
+---
+
+"OK, but there are several communities using DIRAC right now.
+
+What should they do?"
 
 ---
 layout: side-title
@@ -414,13 +560,15 @@ title: Migration
 
 # Migration from DIRAC
 
-- at the moment, it is not possible to run DiracX standalone
-- DIRAC v9 and DiracX will need to live together for a long while
+- Business continuity for DIRAC communities is our top priority:
+    - DIRAC and DiracX share the databases
+    - at the moment, it is not possible to run DiracX standalone
+    - DIRAC v9 and DiracX will need to live together for some time
 
 
 :: content ::
 
-```mermaid
+```mermaid {theme: 'neutral', scale: 0.5}
 architecture-beta
     group common(db)[common]
     group DIRAC(server)[DIRAC]
@@ -437,6 +585,37 @@ architecture-beta
     dips:B -- T:client
     fastapi:B -- T:clientx
 ```
+
+---
+layout: top-title
+color: gray-light
+align: l
+title: Extensions
+---
+
+:: title ::
+
+# On extending DiracX
+
+:: content ::
+
+
+Dirac has to support different Communities with different workflows and requirements. Examples:
+- LHCb is a HEP experiment. Stores the metadata and provenance of every produced files in a LHCb-specific database (with an Oracle backend)
+  - --> [see talk in Track 3 on Monday](https://indico.cern.ch/event/1338689/contributions/6010069/)
+  - --> See also poster #461 on `LbMCSubmit` tool
+- Belle2 is a HEP experiment. Uses Rucio as data management solution.
+  - --> [see talk in Track 1 this afternoon](https://indico.cern.ch/event/1338689/contributions/6010888/)
+- CTAO is an Astrophysics experiment with radically different requirements (wrt to HEP exp.) on how to process its data 
+  - --> [see talk in Track 4 tomorrow](https://indico.cern.ch/event/1338689/contributions/6011028/)
+- HERD is astronomy and particle astrophysics experiment using dHTC for data managemnt
+  - --> [see talk in Track 4 tomorrow](https://indico.cern.ch/event/1338689/contributions/6011011/)
+- EGI use DIRAC as WMS, and EGI-CheckIn as indentity provider
+- WeNMR brings together complementary research teams in the structural biology and life science area 
+
+<span class="bg-cyan-100 text-cyan-600 p-4 border-l-6 border-2 border-cyan-400 rounded-lg pl-8 pr-8 w-full block">
+    It is sometimes necessary to extend all Dirac(X) components (including Web and Pilot). DiracX aims to provide an easy way to do so.
+</span>
 
 
 ---
@@ -474,39 +653,6 @@ Current production and only supported version, used by all DIRAC installations
 DIRAC v9 and DiracX 0.1 will be released together.
 </SpeechBubble>
 
----
-layout: top-title
-color: gray-light
-align: l
-title: Extensions
----
-
-:: title ::
-
-# On extending DiracX
-
-:: content ::
-
-The ol'good DIRAC is extendable: from the main code (DIRAC) to the Web and the Pilot, communites can create/run extensions.
-
-DiracX follows the same path, including DiracX-Web. We also provide a reference extension, dubbed "gubbins"
-
-
----
-layout: top-title
-color: gray-light
-align: l
-title: Development
----
-
-:: title ::
-
-# Development phylosophy
-
-:: content ::
-
-
-
 
 ---
 layout: side-title
@@ -534,10 +680,13 @@ git clone https://github.com/DIRACGrid/diracx-charts
 diracx-charts/run_demo.sh  # do not do it now!
 ```
 
+&nbsp;
+
 ## Discuss:
 - **mattermost** : https://mattermost.web.cern.ch/diracx/
 - **meetings**: (almost) every week on Thursday morning (CET)
 - **hackathons**: we have been doing 2-days DiracX hackathons every quarter. At CERN. [Next one in January](https://indico.cern.ch/event/1458873/)
+
 
 
 ---
@@ -550,7 +699,6 @@ title: summary
 :: title ::
 
 # Summary
-
 
 :: left :: 
 
@@ -603,16 +751,6 @@ speed: 0.4
         Federico Stagni <i>CERN, LHCb</i><br/>
         Andrei Tsaregorotsev <i>CPPM (FR), EGI and LHCb</i>
     </div>
-    <!-- <div class="grid-item text-right mr-4 col-span-1">
-        <strong>Software (very limited list)</strong>
-    </div>
-    <div class="grid-item col-span-2">
-        FastAPI<br/>
-        MySQL/PostGres<br/>
-        OpenSearch<br/>
-        MinIO<br/>
-        K8 and Helm
-    </div> -->
 </div>
 
 &nbsp;
@@ -656,3 +794,31 @@ WebAPI:
 
 <br />
 
+
+
+---
+layout: section
+color: cyan-light
+align: r
+---
+
+## Backup
+
+---
+layout: top-title
+color: gray-light
+align: l
+title: FAQ
+---
+
+:: title :: 
+
+Q/A
+
+:: content ::
+
+- I am using Rucio. I could use DiracX as WMS but do not want to fiddle with DIRAC
+
+--> It will probably be possible, but we do not know when.
+
+- ?

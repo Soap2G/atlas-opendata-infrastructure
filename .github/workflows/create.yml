@@ -21,9 +21,9 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          npm install @iconify-json/clarity @iconify-json/devicon @slidev/cli @slidev/theme-default slidev-theme-hep slidev-theme-neversink
-          npm run build -- --base /${{ github.event.repository.name }}/
+          npm install @iconify-json/clarity @iconify-json/devicon @slidev/cli @slidev/theme-default slidev-theme-neversink playwright-chromium
           npm list
+          npm run build -- --base /${{ github.event.repository.name }}/
 
       - name: Configure Pages
         uses: actions/configure-pages@v4
