@@ -119,7 +119,8 @@ title: WMS
 
 :: title ::
 
-# WMS: Workload Management System
+# WMS
+### Workload Management System
 - Pull model based on Pilot jobs
 - Also "Push" solution for HPCs that do not support pilots (because of limited internet access).
 - Will integrate [CWL (Common Workflow Language)](https://www.commonwl.org) as a way of defining jobs (replacing JDL) --> see poster #217
@@ -159,7 +160,8 @@ titlewidth: is-5
 
 :: title ::
 
-# DMS: Data Management System
+# DMS
+### Data Management System
 It’s about **files**:​ placing, replicating, removing files​
 
 - there are **LFNs** (logical file names) → and users ONLY work with these​
@@ -194,16 +196,17 @@ title: TS
 
 :: title ::
 
-# Productions and Dataset management
+# TS (Transformation System)
+### For productions and Dataset management
 
-- A *Data Processing* **transformation** (e.g. Simulation, Merge, DataReconstruction...) creates jobs in the WMS (and re-sumbit them, and destroy them).​
+- A *Data Processing* **transformation** (e.g. Simulation, Merge, DataReconstruction...) creates jobs in the WMS (and re-sumbit them if needed, eventually destroy them).​
 
 - A *Data Manipulation* **transformation** replicates, or remove, data from storage elements.
 
 :: content ::
 
 <span class="bg-cyan-100 text-cyan-600 p-4 border-l-6 border-2 border-cyan-400 rounded-lg pl-8 pr-8 w-full block">
-    The Transformation System (TS) is used to automate common tasks related to production activities. It can handle thousands of productions, millions of files and jobs.
+    The TS is used to automate common tasks related to production activities. It can handle thousands of productions, millions of files and jobs.
 </span>
 
 &nbsp;
@@ -273,12 +276,12 @@ title: issues
     <li> somewhat cumbersome deployment</li>
     <li> late on “standards”
         <ul class="text-vs mx-auto">
-            <li> http services</li>
-            <li> tokens</li>
-            <li> monitoring</li>
+            <li> No http services</li>
+            <li> No tokens</li>
+            <li> Old monitoring</li>
         </ul>
     </li>
-    <li> “old”-ish design (RPC, “cron” agents…)</li>
+    <li> “old”-ish design (RPC, "cron" agents…)</li>
     <li> not very developer-friendly: rather un-appealing/confusing, especially for new (and young) developers</li>
     <li> multi-VO, but was not designed to do so since the beginning</li>
     <li> no clear interface to a running DIRAC instance</li>
@@ -359,6 +362,7 @@ align: lm
 
 # DiracX Web API
 
+&nbsp;
 
 <AdmonitionType type='caution' >
 What is on the right is the certification Web API, loaded live. Use with caution!
@@ -368,11 +372,11 @@ What is on the right is the certification Web API, loaded live. Use with caution
 <ul class="text-sm">
   <li>
     DIRAC Web APIs with 
-    <devicon-fastapi-wordmark class="text-7xl align-middle inline-block mx-2"></devicon-fastapi-wordmark>
+    <devicon-fastapi-wordmark class="text-7xl align-middle inline-block mx-1"></devicon-fastapi-wordmark>
   </li>
   <li>
     Nicely documented in 
-    <devicon-swagger-wordmark class="text-7xl align-middle inline-block mx-2"></devicon-swagger-wordmark>
+    <devicon-swagger-wordmark class="text-7xl align-middle inline-block mx-1"></devicon-swagger-wordmark>
     <ul class="text-xs ml-4">
       <li>--> this is what you see on the right</li>
     </ul>
@@ -385,59 +389,87 @@ What is on the right is the certification Web API, loaded live. Use with caution
 
 
 ---
-layout: side-title
-side: left
+layout: top-title
 color: gray-light
-titlewidth: is-2
-align: rm-lt
+align: l-lm
 title: CLI
 ---
 
-Authorization with "standard" <a href="https://auth0.com/docs/get-started/authentication-and-authorization-flow/device-authorization-flow" class="text-blue-600 hover:underline">Device Authorization Flow</a>
-
-
 :: title ::
 
-# <mdi-code-braces /> CLI
+# CLI Interactions
 
 :: content ::
 
-Scrollable with clicks 🤯
+Logging in (using the `diracx cli`):
 
-```python {2|3|7|12}{maxHeight:'100px'}
-function helloworld() {
-  console.log('Hello, World 1!')
-  console.log('Hello, World 2!')
-  console.log('Hello, World 3!')
-  console.log('Hello, World 4!')
-  console.log('Hello, World 5!')
-  console.log('Hello, World 6!')
-  console.log('Hello, World 7!')
-  console.log('Hello, World 8!')
-  console.log('Hello, World 9!')
-  console.log('Hello, World 10!')
-  console.log('Hello, World 11!')
+```sh
+❯ export DIRACX_URL=https://diracx-cert.app.cern.ch
+❯ dirac login gridpp                              (diracx-dev)
+Logging in with scopes: ['vo:gridpp']
+Now go to: https://diracx-cert.app.cern.ch/api/auth/device?user_code=XYZXYZXYZ
+.....Saved credentials to /home/fstagni/.cache/diracx/credentials.json
+
+Login successful!
+```
+
+Submitting a job (using Python `requests`):
+
+```python{1,3-8,10-28,30-32}{lines:true,maxHeight:'100px'}
+import requests
+
+# Define the headers
+headers = {
+    'accept': 'application/json',
+    'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXV ...',
+    'Content-Type': 'application/json',
+}
+
+# Define the data payload
+data = [
+    "Arguments = \"jobDescription.xml -o LogLevel=INFO\";\n"
+    "Executable = \"dirac-jobexec\";\n"
+    "JobGroup = jobGroup;\n"
+    "JobName = jobName;\n"
+    "JobType = User;\n"
+    "LogLevel = INFO;\n"
+    "OutputSandbox =\n"
+    "    {\n"
+    "        Script1_CodeOutput.log,\n"
+    "        std.err,\n"
+    "        std.out\n"
+    "    };\n"
+    "Priority = 1;\n"
+    "Site = ANY;\n"
+    "StdError = std.err;\n"
+    "StdOutput = std.out;"
+]
+
+# Send the POST request
+response = requests.post('https://diracx-cert.app.cern.ch/api/jobs/', headers=headers, json=data)
+```
+
+
+Getting its status (using `curl`):
+
+````md magic-move
+```sh
+curl -X 'GET' \
+  'https://diracx-cert.app.cern.ch/api/jobs/status?job_ids=8971' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXV ...'  | jq
+```
+
+```json
+{
+  "8971": {
+    "Status": "Done",
+    "MinorStatus": "Execution Complete",
+    "ApplicationStatus": "Unknown"
+  }
 }
 
 ```
-
-You can even edit the code in the browser
-
-```ts {monaco}
-console.log('HelloWorld')
-```
-
-You can even run the code in the browser
-
-```sh
-curl -X 'GET' \
-  'https://diracx-cert.app.cern.ch/api/jobs/status?job_ids=123' \
-  -H 'accept: application/json'
-```
-
-<SpeechBubble position="t" color='orange' shape="round" maxWidth="300px">
-**REST API**, so use your own language
-</SpeechBubble>
 
 
 ---
@@ -471,6 +503,7 @@ color: gray-light
 
 # Architecture diagram
 
+to-do
 
 
 ---
@@ -481,9 +514,9 @@ authorsize: text-s
 author: 'Some of you out there'
 ---
 
-"OK, but the Grid still uses proxies. 
+"OK, but there are several communities using DIRAC right now.
 
-VOMS is alive!"
+"Also, the Grid still uses proxies. VOMS is alive!"
 
 ---
 layout: top-title
@@ -504,59 +537,61 @@ title: tokens
 - **Verifying a user's identity** (internally to Dirac): 
     - **DiracX** uses only tokens ([link to security model](https://github.com/DIRACGrid/diracx/blob/main/security_model.md))
     - **DIRAC** uses only X509 proxies and certificates to verify identities 
-    - --> For a (long) while, **users will have both a token and proxy**.
+
+
+---
+layout: top-title-two-cols
+color: gray-light
+align: c-lm-rm
+title: proxies+tokens
+columns: is-4
+---
+
+:: title ::
+
+# On proxies and tokens
+
+:: left :: 
+
+```mermaid {theme: 'forest', scale: 0.5}
+sequenceDiagram
+    title Tokens with standard OAuth2 flow
+    create actor U as User
+    create participant DiracX
+    U->>DiracX: Login
+    DiracX->>U: Redirect
+    create participant External_IdP
+    U->>External_IdP: 
+    destroy External_IdP
+    External_IdP->>DiracX: ID token
+    DiracX->>U: DiracX token
+```
 
 <AdmonitionType type='Note' >
 DiracX delivers its own tokens, they are not the same tokens used for the Grid endpoints
 </AdmonitionType>
 
----
-layout: standard
-color: gray-light
-align: lm
-title: interactions
----
 
-<div style="text-align: right"> On proxies and tokens/2 </div>
+:: right ::
 
-```mermaid {theme: 'neutral', scale: 0.5}
-%%{init: { "theme": "forest" } }%%
+```mermaid {theme: 'forest', scale: 0.5}
 sequenceDiagram
+    title Working with proxy and token
     create actor U as User
-    create participant DIRAC_ProxyManager
-    U->>DIRAC_ProxyManager: dirac-proxy-init
+    create participant dirac-proxy-init
+    U->>dirac-proxy-init: 
     create participant VOMS
-    DIRAC_ProxyManager->>VOMS: get proxy
+    dirac-proxy-init->>VOMS: 
     destroy VOMS
-    VOMS->>DIRAC_ProxyManager: VOMS proxy
-    DIRAC_ProxyManager-->>U: redirect to external IdP
-    create participant IAM
-    U->>IAM: Authorization Code Flow or Device Flow
-    destroy IAM
-    IAM->>DIRAC_ProxyManager: IAM token
-    destroy DIRAC_ProxyManager
-    DIRAC_ProxyManager->>U: DIRAC proxy and DiracX token
-    create participant DIRAC_service
-    U->>DIRAC_service: DIRAC proxy
-    destroy DIRAC_service
-    create participant DiracX_service
-    U->>DiracX_service: DiracX token
-    destroy DiracX_service
+    VOMS->>dirac-proxy-init: VOMS proxy
+    dirac-proxy-init->>DiracX: exchange proxy for token
+    DiracX->>dirac-proxy-init: DiracX token
+    dirac-proxy-init->>U: proxy+token bundle
+    U->>DIRAC_service: proxy
+    U->>DiracX: token
 ```
 
 
-
----
-layout: quote
-color: sky-light
-quotesize: text-m
-authorsize: text-s
-author: 'Again, some of you out there'
----
-
-"OK, but there are several communities using DIRAC right now.
-
-What should they do?"
 
 ---
 layout: side-title
@@ -579,15 +614,15 @@ title: Migration
 
 ```mermaid {theme: 'neutral', scale: 0.5}
 architecture-beta
-    group common(db)[common]
+    group common(database)[common]
     group DIRAC(server)[DIRAC]
     group DiracX(server)[DiracX]
 
-    service db(devicon:sqldeveloper)[Database] in common
-    service client(clarity:thin-client-solid)[Client] in DIRAC
+    service db(database)[Database] in common
+    service client(internet)[Client] in DIRAC
     service dips(server)[DIPS] in DIRAC
-    service fastapi(devicon:fastapi)[FastAPI] in DiracX
-    service clientx(clarity:thin-client-line)[Client] in DiracX
+    service fastapi(server)[FastAPI] in DiracX
+    service clientx(internet)[Client] in DiracX
 
     db:B -- T:dips
     db:B -- T:fastapi
@@ -749,6 +784,7 @@ title: summary
 - Foundations are there, the first release will soon be here
 - We plan to ease the interoperability with Rucio
     - DiracX will still have the Data Management part, but WMS will come first
+- In October 2023 the DIRAC consortium members approved DiracX recommending a smooth transition from DIRAC
 
 
 
@@ -757,6 +793,7 @@ layout: credits
 color: navy
 loop: true
 speed: 0.4
+title: credits/people
 ---
 
 <div class="grid text-size-4 grid-cols-3 w-3/4 gap-y-10 auto-rows-min ml-auto mr-auto">
