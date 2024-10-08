@@ -391,7 +391,7 @@ What is on the right is the certification Web API, loaded live. Use with caution
 ---
 layout: top-title
 color: gray-light
-align: l-lm
+align: lm
 title: CLI
 ---
 
@@ -401,65 +401,32 @@ title: CLI
 
 :: content ::
 
-Logging in (using the `diracx cli`):
+1. Logging in (using the `diracx cli`):
 
-```sh
-❯ export DIRACX_URL=https://diracx-cert.app.cern.ch
-❯ dirac login gridpp                              (diracx-dev)
+```bash {maxHeight:'80px'}
+❯ dirac login gridpp
 Logging in with scopes: ['vo:gridpp']
 Now go to: https://diracx-cert.app.cern.ch/api/auth/device?user_code=XYZXYZXYZ
-.....Saved credentials to /home/fstagni/.cache/diracx/credentials.json
-
+...Saved credentials to /home/fstagni/.cache/diracx/credentials.json
 Login successful!
 ```
 
-Submitting a job (using Python `requests`):
+2. Submitting a job (using Python `requests`):
 
-```python{1,3-8,10-28,30-32}{lines:true,maxHeight:'100px'}
-import requests
 
-# Define the headers
-headers = {
-    'accept': 'application/json',
-    'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXV ...',
-    'Content-Type': 'application/json',
-}
-
-# Define the data payload
-data = [
-    "Arguments = \"jobDescription.xml -o LogLevel=INFO\";\n"
-    "Executable = \"dirac-jobexec\";\n"
-    "JobGroup = jobGroup;\n"
-    "JobName = jobName;\n"
-    "JobType = User;\n"
-    "LogLevel = INFO;\n"
-    "OutputSandbox =\n"
-    "    {\n"
-    "        Script1_CodeOutput.log,\n"
-    "        std.err,\n"
-    "        std.out\n"
-    "    };\n"
-    "Priority = 1;\n"
-    "Site = ANY;\n"
-    "StdError = std.err;\n"
-    "StdOutput = std.out;"
-]
-
-# Send the POST request
-response = requests.post('https://diracx-cert.app.cern.ch/api/jobs/', headers=headers, json=data)
+```ts
+print(test)
 ```
 
-
-Getting its status (using `curl`):
+3. Getting its status (using `curl`):
 
 ````md magic-move
-```sh
+```bash
 curl -X 'GET' \
   'https://diracx-cert.app.cern.ch/api/jobs/status?job_ids=8971' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXV ...'  | jq
 ```
-
 ```json
 {
   "8971": {
@@ -468,8 +435,8 @@ curl -X 'GET' \
     "ApplicationStatus": "Unknown"
   }
 }
-
 ```
+````
 
 
 ---
@@ -544,18 +511,19 @@ layout: top-title-two-cols
 color: gray-light
 align: c-lm-rm
 title: proxies+tokens
-columns: is-4
+columns: is-3
 ---
 
 :: title ::
 
-# On proxies and tokens
+# More on proxies and tokens
 
 :: left :: 
 
-```mermaid {theme: 'forest', scale: 0.5}
+```mermaid {theme: 'forest', scale: 0.4}
+%%{init: { 'theme': 'forest' }}%%
 sequenceDiagram
-    title Tokens with standard OAuth2 flow
+    title DiracX: tokens with standard OAuth2 flow
     create actor U as User
     create participant DiracX
     U->>DiracX: Login
@@ -574,9 +542,10 @@ DiracX delivers its own tokens, they are not the same tokens used for the Grid e
 
 :: right ::
 
-```mermaid {theme: 'forest', scale: 0.5}
+```mermaid {theme: 'forest', scale: 0.4}
+%%{init: { 'theme': 'forest' }}%%
 sequenceDiagram
-    title Working with proxy and token
+    title DIRAC+DiracX: Working with proxies and tokens
     create actor U as User
     create participant dirac-proxy-init
     U->>dirac-proxy-init: 
@@ -644,7 +613,7 @@ title: Extensions
 :: content ::
 
 
-Dirac has to support different Communities with different workflows and requirements. Examples:
+Dirac has to support different communities with different workflows and requirements. Examples:
 <ul class="text-sm">
   <li>LHCb stores the metadata and provenance of every produced file in a LHCb-specific database (with an Oracle backend)
     <ul class="text-xs ml-4">
