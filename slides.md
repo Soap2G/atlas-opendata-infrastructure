@@ -1,5 +1,6 @@
 ---
 colorSchema: light
+favicon: /public/images/diracx-logo-square.png
 color: orange-light
 layout: cover
 routerMode: hash
@@ -413,8 +414,7 @@ Login successful!
 
 2. Submitting a job (using Python `requests`):
 
-
-```ts
+```
 print(test)
 ```
 
