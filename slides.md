@@ -91,8 +91,8 @@ title: history
 
 :: content ::
 
-```mermaid
-%%{init: { 'logLevel': 'debug', 'theme': 'base', 'timeline': {'disableMulticolor': true}}}%%
+```mermaid {theme: 'base', scale: 1.2}
+%%{init: {'theme': 'base', 'timeline': {'disableMulticolor': true}}}%%
 timeline
         section LHCb software
           around 2000 : MC production system: bash scripts running at production sites
@@ -404,7 +404,7 @@ title: CLI
 
 1. Logging in (using the `diracx cli`):
 
-```bash {maxHeight:'80px'}
+```bash
 ❯ dirac login gridpp
 Logging in with scopes: ['vo:gridpp']
 Now go to: https://diracx-cert.app.cern.ch/api/auth/device?user_code=XYZXYZXYZ
@@ -414,8 +414,10 @@ Login successful!
 
 2. Submitting a job (using Python `requests`):
 
-```
-print(test)
+```python
+import requests
+
+requests.post('https://diracx-cert.app.cern.ch/api/jobs/', headers={'accept': 'application/json', 'Authorization': 'Bearer eyJhbG...', 'Content-Type': 'application/json'}, json=jdl)
 ```
 
 3. Getting its status (using `curl`):
@@ -425,7 +427,7 @@ print(test)
 curl -X 'GET' \
   'https://diracx-cert.app.cern.ch/api/jobs/status?job_ids=8971' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXV ...'  | jq
+  -H 'Authorization: Bearer eyJhbG...'  | jq
 ```
 ```json
 {
@@ -563,9 +565,9 @@ sequenceDiagram
 
 
 ---
-layout: side-title
+layout: top-title
 color: gray-light
-align: lm-lm
+align: l
 title: Migration
 ---
 
@@ -575,29 +577,24 @@ title: Migration
 
 - Business continuity for DIRAC communities is our top priority:
     - DIRAC and DiracX share the databases
+    - the legacy adaptor will move traffic from DIRAC to DiracX services
     - at the moment, it is not possible to run DiracX standalone
     - DIRAC v9 and DiracX will need to live together for some time
 
 
 :: content ::
 
-```mermaid {theme: 'neutral', scale: 0.5}
-architecture-beta
-    group common(database)[common]
-    group DIRAC(server)[DIRAC]
-    group DiracX(server)[DiracX]
 
-    service db(database)[Database] in common
-    service client(internet)[Client] in DIRAC
-    service dips(server)[DIPS] in DIRAC
-    service fastapi(server)[FastAPI] in DiracX
-    service clientx(internet)[Client] in DiracX
+<div style="display: flex; align-items: center; justify-content: center;">
+    <img id="D_X" src="/public/images/legacy_before_Adaptor.png" class="mx-auto w-1/3"> </img>
+    <span style="margin: 0 50px;">--></span>
+    <img id="D_X" src="/public/images/legaxyAdaptor.png" class="mx-auto w-1/3"> </img>
+    <span style="margin: 0 50px;">--></span>
+    <img id="D_X" src="/public/images/legacy_after_Adaptor.png" class="mx-auto w-1/3"> </img>
+</div>
 
-    db:B -- T:dips
-    db:B -- T:fastapi
-    dips:B -- T:client
-    fastapi:B -- T:clientx
-```
+
+
 
 ---
 layout: top-title
