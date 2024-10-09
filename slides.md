@@ -91,7 +91,7 @@ title: history
 
 :: content ::
 
-```mermaid {theme: 'base', scale: 1.2}
+```mermaid
 %%{init: {'theme': 'base', 'timeline': {'disableMulticolor': true}}}%%
 timeline
         section LHCb software
@@ -466,14 +466,21 @@ What is on the left is the certification WebApp, loaded live. Use with caution!
 
 
 ---
-layout: default
+layout: side-title
 color: gray-light
+title: architecture
+align: cm-lm
+titlewidth: is-3
 ---
+
+
+:: title ::
 
 # Architecture diagram
 
-to-do
+:: content ::
 
+<img id="D_X" src="/public/images/architecture.png" class="mx-auto"> </img>
 
 ---
 layout: quote
@@ -573,12 +580,9 @@ title: Migration
 
 :: title ::
 
-# Migration from DIRAC
-
 - Business continuity for DIRAC communities is our top priority:
-    - DIRAC and DiracX share the databases
+    - DIRAC and DiracX share the databases (MySQL and OpenSearch)
     - the legacy adaptor will move traffic from DIRAC to DiracX services
-    - at the moment, it is not possible to run DiracX standalone
     - DIRAC v9 and DiracX will need to live together for some time
 
 
@@ -587,10 +591,10 @@ title: Migration
 
 <div style="display: flex; align-items: center; justify-content: center;">
     <img id="D_X" src="/public/images/legacy_before_Adaptor.png" class="mx-auto w-1/3"> </img>
-    <span style="margin: 0 50px;">--></span>
-    <img id="D_X" src="/public/images/legaxyAdaptor.png" class="mx-auto w-1/3"> </img>
-    <span style="margin: 0 50px;">--></span>
-    <img id="D_X" src="/public/images/legacy_after_Adaptor.png" class="mx-auto w-1/3"> </img>
+    <span style="margin: 0 20px;">-></span>
+    <img id="D_Ad" src="/public/images/legaxyAdaptor.png" class="mx-auto w-1/3"> </img>
+    <span style="margin: 0 20px;">-></span>
+    <img id="X" src="/public/images/legacy_after_Adaptor.png" class="mx-auto w-1/3"> </img>
 </div>
 
 
