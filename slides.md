@@ -205,9 +205,9 @@ title: TS
 # TS (Transformation System)
 ### For productions and Dataset management
 
-- A *Data Processing* **transformation** (e.g. Simulation, Merge, DataReconstruction...) creates jobs in the WMS (and re-sumbit them if needed, eventually destroy them).​
+- A *Data Processing* **transformation** (e.g. Simulation, Merge, DataReconstruction...) creates jobs in the WMS (and re-submit them if needed, eventually destroy them).​
 
-- A *Data Manipulation* **transformation** replicates, or remove, data from storage elements.
+- A *Data Manipulation* **transformation** replicates, or removes, data from storage elements.
 
 :: content ::
 
@@ -237,7 +237,7 @@ TransformationSystem((TransformationSystem))
 layout: top-title-two-cols
 align: c-lm-lm
 color: gray-light
-title: tech
+title: DIRAC tech
 ---
 
 
@@ -247,20 +247,29 @@ title: tech
 
 :: left :: 
 
-- DIRAC is written in python3
-  - with the exception of the DIRAC Pilot, which needs to still be able to run with Python2
-- Services are exposed at urls like `dips://box.some.where:9132/WorloadManagement/`
-  - `dips` stands for "DIRAC protocol"
-- The DIRAC framework provides also "Agents" and "Executors" to animate the system
-- As backends, MySQL and OpenSearch are supported (for different purposes)
+<ul class="text-sm">
+  <li>DIRAC is written in python 3
+    <ul class="text-xs">
+      <li>with the Pilot code supporting Python 2.7</li>
+    </ul>
+  </li>
+  <li>Services are exposed at urls like <code>dips://box.some.where:9132/WorloadManagement/</code>
+    <ul class="text-xs">
+      <li><code>dips</code> stands for "DIRAC protocol"</li>
+    </ul>
+  </li>
+  <li>The DIRAC framework provides also "Agents" and "Executors" to animate the system</li>
+  <li>As backends, <logos-mysql class="text-2xl align-middle inline-block mx-0"></logos-mysql> and <logos:opensearch class="text-1xl align-middle inline-block mx-0"></logos:opensearch> are supported (for different purposes)</li>
+</ul>
 
-![](/public/images/DIRAC_stack.png))
+
+![](/public/images/DIRAC_stack.png)
 
 :: right ::
 
-DIRAC also provides a WebApp
+DIRAC also provides a WebApp: 
 
-<img id="WebApp" src="/public/images/WebApp.png">
+![](/public/images/WebApp.png)
 
 Implemented using `ExtJS`, and fully custom Python "bindings"
 
@@ -312,7 +321,7 @@ title: requirements
 ---
 
 <StickyNote color="gray-light" textAlign="center" width="260px" title="Developers and maintainers requirements" v-drag="[350,380,320,100]">
-Easy to test (will make it easier to code), but also modern, funny, and accessible to new developers
+Easy to test (will make it easier to code), but also modern, fun, and accessible to new developers
 </StickyNote>
 
 
@@ -325,7 +334,9 @@ Easy to test (will make it easier to code), but also modern, funny, and accessib
 ## Communities/Users requirements
 
 Ease of use, including ease of access
+
 Fast and responsive interfaces
+
 Scalable and flexible
 
 :: right ::
@@ -333,8 +344,11 @@ Scalable and flexible
 ## Administrator requirements
 
 Ease of installation and update
+
 Up-to-date documentation
+
 Clear confguration
+
 Ready-to-use dashboards
 
 ---
@@ -976,6 +990,8 @@ Q/A
 --> It carries the `dirac_properties` (which are the same as in current DIRAC)
 
 
+&nbsp;
+&nbsp;
 &nbsp;
 &nbsp;
 &nbsp;

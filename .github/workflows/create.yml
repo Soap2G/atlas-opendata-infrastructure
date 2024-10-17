@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          npm install unplugin-icons @iconify-json/clarity @iconify-json/devicon @iconify-json/devicon-plain @slidev/cli @slidev/theme-default slidev-theme-neversink playwright-chromium
+          npm install unplugin-icons @iconify-json/logos @iconify-json/devicon @iconify-json/devicon-plain @slidev/cli @slidev/theme-default slidev-theme-neversink playwright-chromium
           npm list
           npm run build -- --base /${{ github.event.repository.name }}/
 
