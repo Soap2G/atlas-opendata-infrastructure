@@ -65,21 +65,21 @@ color: gray-light
   <img id="Juno" src="/public/images/Juno.jpeg" alt="Juno" style="width: 90px;">
   <img id="Belle2" src="/public/images/Belle2_logo.png" alt="Belle2" style="width: 90px;">
   <img id="CTA" src="/public/images/CTA.jpg" alt="CTA" style="width: 90px;">
+  <img id="fcc" src="/public/images/fcc.png" alt="lz" style="width: 90px;">
   <img id="ilc" src="/public/images/ilc.png" alt="ILC" style="width: 90px;">
   <img id="LHCb" src="/public/images/LHCb.png" alt="LHCb" style="width: 90px;">
-  <img id="nica" src="/public/images/nica.jpg" alt="nica" style="width: 90px;">
   <img id="BES3" src="/public/images/BES3.png" alt="BES3" style="width: 90px;">
   <img id="GriPP" src="/public/images/GridPP-Logo.png" alt="gridPP" style="width: 90px;">
   <img id="PA" src="/public/images/pierre-auger-logo.png" alt="pierre-auger" style="width: 90px;">
   <img id="EGI" src="/public/images/EGI.png" alt="EGI" style="width: 90px;">
-  <img id="cepc" src="/public/images/cepc.png" alt="cepc" style="width: 90px;">
   <img id="na62" src="/public/images/na62.jpeg" alt="na62" style="width: 90px;">
   <img id="t2k" src="/public/images/t2k.png" alt="t2k" style="width: 90px;">
   <img id="weNMR" src="/public/images/WeNMR-logo.png" alt="weNMR" style="width: 90px;">
   <img id="hyperk" src="/public/images/LogoHyperK.png" alt="hyperk" style="width: 90px;">
-  <img id="euclid" src="/public/images/euclid.jpeg" alt="euclid" style="width: 90px;">
   <img id="LZ" src="/public/images/LZ.png" alt="lz" style="width: 90px;">
-  <img id="fcc" src="/public/images/fcc.png" alt="lz" style="width: 90px;">
+  <img id="euclid" src="/public/images/euclid.jpeg" alt="euclid" style="width: 90px;">
+  <img id="cepc" src="/public/images/cepc.png" alt="cepc" style="width: 90px;">
+  <img id="nica" src="/public/images/nica.jpg" alt="nica" style="width: 90px;">
 </div>
 
 
@@ -174,7 +174,7 @@ It’s about **files**:​ placing, replicating, removing files​
 - **LFNs** are registered in *catalog(s)​*
     - where are the LFNs? (in the DIRAC File Catalog (DFC), or in Rucio)​
     - what are their metadata? (in the DFC, or in the LHCb Bookkeeping, or in AMGA)​
-- LFNs *may* have **PFNs**, stored in **SEs**, that can be accessed with several protocols.​
+- LFNs *may* have **PFNs** (physincal file names), stored in **SEs** (Storage Elements), that can be accessed with several protocols.​
 
 :: content ::
 
@@ -273,6 +273,66 @@ DIRAC also provides a WebApp:
 
 Implemented using `ExtJS`, and fully custom Python "bindings"
 
+---
+layout: top-title-two-cols
+align: c-lm-lm
+color: gray-light
+title: world
+---
+
+<StickyNote color="gray-light" textAlign="center" width="260px" title="DIRAC needs to follow these trends" v-drag="[350,380,320,100]">
+What is the best way to achieve that? Can we do it within the current framework?
+</StickyNote>
+
+
+:: title ::
+
+# Few topics of interest from the technology world around us
+
+:: left ::
+
+## tech trends
+
+- You authenticate with an external "Identity provider":
+
+![](/public/images/idp_login.png)
+
+- For authorization purposes you are using tokens everywhere:
+
+![](/public/images/google_token.png)
+
+- (Nicely documented) REST APIs are a de-facto standard:
+
+```sh
+# "get a tag" from github
+
+curl -L \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer <YOUR-TOKEN>" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/OWNER/REPO/git/tags/TAG_SHA
+```
+
+:: right ::
+
+## WLCG, EGI
+
+**Community management**
+- VOMS (Virtual Organization Membership Service) has been, for many years, a de-facto standard
+  - it issues VOMS proxies ("short" certificates)
+  - Outside of WLCG and EGI, proxies are not a thing
+- There are new Identity Providers delivering tokens instead of proxies
+
+In this conference:
+
+<a href="https://indico.cern.ch/event/1338689/contributions/6010716/" class="text-blue-600 hover:underline">WLCG transition from X.509 to Tokens: Progress and Outlook</a></li>
+<a href="https://indico.cern.ch/event/1338689/contributions/6011018/" class="text-blue-600 hover:underline">CMS Token Transition</a></li>
+<a href="https://indico.cern.ch/event/1338689/contributions/6011022/" class="text-blue-600 hover:underline">
+Fermilab’s Transition to Token Authentication</a></li>
+
+
+
+
 
 ---
 layout: side-title
@@ -298,7 +358,7 @@ title: issues
             <li> Old monitoring</li>
         </ul>
     </li>
-    <li> “old”-ish design (RPC, "cron" agents…)</li>
+    <li> "old"-ish design (RPC, "cron" agents...)</li>
     <li> not very developer-friendly: rather un-appealing/confusing, especially for new (and young) developers</li>
     <li> multi-VO, but was not designed to do so since the beginning</li>
     <li> no clear interface to a running DIRAC instance</li>
@@ -357,7 +417,7 @@ side: left
 color: gray-light
 titlewidth: is-5
 align: rm-lm
-title: DiraX
+title: DiracX
 ---
 
 :: title ::
@@ -369,7 +429,10 @@ title: DiraX
 - A cloud native app
 - Multi-VO from the get-go
 - Standards-based
-- Still DIRAC, in terms of functionalities
+
+<AdmonitionType type='important' >
+Still DIRAC, in terms of functionalities.
+</AdmonitionType>
 
 
 ---
@@ -869,12 +932,10 @@ title: summary
 :: right ::
 
 ### DiracX is in active development
-- It will live together with DIRAC v9 for a while
 - Foundations are there, the first release will soon be here
-- We plan to ease the interoperability with Rucio
-    - DiracX will still have the Data Management part, but WMS will come first
-- In October 2023 the DIRAC consortium members approved DiracX recommending a smooth transition from DIRAC
-
+- DiracX will live together with DIRAC v9 for a while
+- DiracX will ease the interoperability with Rucio and/or any other tool out there
+    - DiracX will still have the Data Management part, but its Workload Management functionalities will come first
 
 
 ---
