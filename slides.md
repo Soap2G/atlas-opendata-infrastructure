@@ -61,26 +61,27 @@ slide_info: false
 color: gray-light
 ---
 
-<div style="display: flex; flex-wrap: wrap; justify-content: space-around; gap: 20px;">
-  <img id="Juno" src="/public/images/Juno.jpeg" alt="Juno" style="width: 90px;">
-  <img id="Belle2" src="/public/images/Belle2_logo.png" alt="Belle2" style="width: 90px;">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 20px;">
+  <img id="Juno" src="/public/images/Juno.jpeg" alt="Juno" style="width: 80px;">
+  <img id="Belle2" src="/public/images/Belle2_logo.png" alt="Belle2" style="width: 80px;">
   <img id="CTA" src="/public/images/CTA.jpg" alt="CTA" style="width: 90px;">
   <img id="fcc" src="/public/images/fcc.png" alt="lz" style="width: 90px;">
   <img id="ilc" src="/public/images/ilc.png" alt="ILC" style="width: 90px;">
   <img id="LHCb" src="/public/images/LHCb.png" alt="LHCb" style="width: 90px;">
-  <img id="BES3" src="/public/images/BES3.png" alt="BES3" style="width: 90px;">
+  <img id="BES3" src="/public/images/BES3.png" alt="BES3" style="width: 80px;">
   <img id="GriPP" src="/public/images/GridPP-Logo.png" alt="gridPP" style="width: 90px;">
-  <img id="PA" src="/public/images/pierre-auger-logo.png" alt="pierre-auger" style="width: 90px;">
+  <img id="PA" src="/public/images/pierre-auger-logo.png" alt="pierre-auger" style="width: 70px;">
   <img id="EGI" src="/public/images/EGI.png" alt="EGI" style="width: 90px;">
   <img id="na62" src="/public/images/na62.jpeg" alt="na62" style="width: 90px;">
   <img id="t2k" src="/public/images/t2k.png" alt="t2k" style="width: 90px;">
   <img id="weNMR" src="/public/images/WeNMR-logo.png" alt="weNMR" style="width: 90px;">
   <img id="hyperk" src="/public/images/LogoHyperK.png" alt="hyperk" style="width: 90px;">
-  <img id="LZ" src="/public/images/LZ.png" alt="lz" style="width: 90px;">
+  <img id="LZ" src="/public/images/LZ.png" alt="lz" style="width: 50px;">
   <img id="euclid" src="/public/images/euclid.jpeg" alt="euclid" style="width: 90px;">
   <img id="cepc" src="/public/images/cepc.png" alt="cepc" style="width: 90px;">
-  <img id="nica" src="/public/images/nica.jpg" alt="nica" style="width: 90px;">
+  <img id="nica" src="/public/images/nica.jpg" alt="nica" style="width: 80px;">
 </div>
+
 
 
 ---
@@ -170,11 +171,11 @@ titlewidth: is-5
 ### Data Management System
 It’s about **files**:​ placing, replicating, removing files​
 
-- there are **LFNs** (logical file names) → and users ONLY work with these​
+- there are **LFNs** (logical file names)
 - **LFNs** are registered in *catalog(s)​*
     - where are the LFNs? (in the DIRAC File Catalog (DFC), or in Rucio)​
     - what are their metadata? (in the DFC, or in the LHCb Bookkeeping, or in AMGA)​
-- LFNs *may* have **PFNs** (physincal file names), stored in **SEs** (Storage Elements), that can be accessed with several protocols.​
+- LFNs *may* have **PFNs** (physical file names), stored in **SEs** (Storage Elements), that can be accessed with several protocols.​
 
 :: content ::
 
@@ -275,33 +276,34 @@ Implemented using `ExtJS`, and fully custom Python "bindings"
 
 ---
 layout: top-title-two-cols
-align: c-lm-lm
+align: l-lm-lt
 color: gray-light
 title: world
 ---
 
-<StickyNote color="gray-light" textAlign="center" width="260px" title="DIRAC needs to follow these trends" v-drag="[350,380,320,100]">
-What is the best way to achieve that? Can we do it within the current framework?
+<StickyNote color="gray-light" textAlign="center" width="260px" title="Dirac should follow these trends" v-drag="[550,380,320,100]">
+What is the best way to achieve keep up with these trends? Can we do it within the current framework?
 </StickyNote>
 
 
 :: title ::
 
-# Few topics of interest from the technology world around us
+## Technology trends
 
 :: left ::
 
-## tech trends
+You authenticate with an external "Identity provider":
 
-- You authenticate with an external "Identity provider":
+<img src="/public/images/idp_login.png" alt="idp_login" class="mx-auto w-2/3"/>
 
-![](/public/images/idp_login.png)
+For authorization purposes you are using tokens everywhere:
 
-- For authorization purposes you are using tokens everywhere:
+<img src="/public/images/google_token.png" alt="google_token" class="mx-auto w-4/5"/>
 
-![](/public/images/google_token.png)
 
-- (Nicely documented) REST APIs are a de-facto standard:
+:: right ::
+
+(Nicely documented) REST APIs are a de-facto standard:
 
 ```sh
 # "get a tag" from github
@@ -313,25 +315,82 @@ curl -L \
   https://api.github.com/repos/OWNER/REPO/git/tags/TAG_SHA
 ```
 
-:: right ::
+---
+layout: top-title
+align: lm
+color: gray-light
+title: wlcg
+---
 
-## WLCG, EGI
+<StickyNote color="gray-light" textAlign="center" width="260px" title="Dirac needs to follow these recommendations" v-drag="[570,400,320,120]">
+What is the best way to achieve keep up with these recommendations? Can we do it within the current framework?
+</StickyNote>
 
-**Community management**
-- VOMS (Virtual Organization Membership Service) has been, for many years, a de-facto standard
+
+:: title ::
+
+## Recommendations from WLCG, EGI, etc.
+
+
+:: content ::
+
+- VOMS (Virtual Organization Membership Service) has been, for many years, a de-facto standard for **community management**
   - it issues VOMS proxies ("short" certificates)
   - Outside of WLCG and EGI, proxies are not a thing
-- There are new Identity Providers delivering tokens instead of proxies
+- --> There are new Identity Providers delivering tokens instead of proxies
+
+&nbsp;
 
 In this conference:
 
-<a href="https://indico.cern.ch/event/1338689/contributions/6010716/" class="text-blue-600 hover:underline">WLCG transition from X.509 to Tokens: Progress and Outlook</a></li>
-<a href="https://indico.cern.ch/event/1338689/contributions/6011018/" class="text-blue-600 hover:underline">CMS Token Transition</a></li>
-<a href="https://indico.cern.ch/event/1338689/contributions/6011022/" class="text-blue-600 hover:underline">
-Fermilab’s Transition to Token Authentication</a></li>
+- <a href="https://indico.cern.ch/event/1338689/contributions/6010716/" class="text-blue-600 hover:underline">WLCG transition from X.509 to Tokens: Progress and Outlook</a>
+- <a href="https://indico.cern.ch/event/1338689/contributions/6011018/" class="text-blue-600 hover:underline">CMS Token Transition</a>
+- <a href="https://indico.cern.ch/event/1338689/contributions/6011022/" class="text-blue-600 hover:underline">Fermilab's Transition to Token Authentication</a>
 
 
 
+---
+layout: top-title-two-cols
+color: gray-light
+align: c-rt-lt
+title: requirements
+---
+
+<StickyNote color="gray-light" textAlign="center" width="260px" title="Developers and maintainers requirements" v-drag="[350,300,320,100]">
+Easy to test (will make it easier to code), but also modern, fun, and accessible to new developers
+</StickyNote>
+
+<StickyNote color="amber-light" textAlign="center" width="260px" title="Paramount requirement" v-drag="[365,420,290,70]">
+We need to ensure business continuity
+</StickyNote>
+
+
+
+:: title ::
+
+# Minimal Requirements
+
+:: left ::
+
+## Communities/Users requirements
+
+Ease of use, including ease of access
+
+Fast and responsive interfaces
+
+Scalable and flexible
+
+:: right ::
+
+## Administrator requirements
+
+Ease of installation and update
+
+Up-to-date documentation
+
+Clear confguration
+
+Ready-to-use dashboards
 
 
 ---
@@ -367,49 +426,19 @@ title: issues
 
 ---
 layout: section
+color: lime-light
+---
+
+## We decided that the best of satisfying the requirements was to code a new Dirac
+
+
+---
+layout: section
 color: cyan-light
 --- 
 
 ## DiracX,  the neXt DIRAC incarnation
 
-
----
-layout: top-title-two-cols
-color: gray-light
-align: c-rt-lt
-title: requirements
----
-
-<StickyNote color="gray-light" textAlign="center" width="260px" title="Developers and maintainers requirements" v-drag="[350,380,320,100]">
-Easy to test (will make it easier to code), but also modern, fun, and accessible to new developers
-</StickyNote>
-
-
-:: title ::
-
-# Minimal Requirements
-
-:: left ::
-
-## Communities/Users requirements
-
-Ease of use, including ease of access
-
-Fast and responsive interfaces
-
-Scalable and flexible
-
-:: right ::
-
-## Administrator requirements
-
-Ease of installation and update
-
-Up-to-date documentation
-
-Clear confguration
-
-Ready-to-use dashboards
 
 ---
 layout: side-title
@@ -431,7 +460,7 @@ title: DiracX
 - Standards-based
 
 <AdmonitionType type='important' >
-Still DIRAC, in terms of functionalities.
+Still Dirac, in terms of functionalities.
 </AdmonitionType>
 
 
@@ -798,15 +827,15 @@ Examples:
   <li>EGI uses DIRAC as WMS, and EGI-CheckIn as an identity provider. Hosts (among others) WeNMR (structural biology and life science)</li>
 </ul>
 
-<SpeechBubble position="l" color='amber' shape="round"  v-drag="[840,250,120,180]">
-Extension "Gubbins" provided for reference
+<SpeechBubble position="l" color='amber' shape="round"  v-drag="[840,290,140,140]">
+An extension is provided for reference
 </SpeechBubble>
 
 
 ---
 layout: side-title
 color: gray-light
-title: architecture
+title: Architecture
 align: cm-lm
 titlewidth: is-3
 ---
@@ -918,7 +947,7 @@ diracx-charts/run_demo.sh  # do not do it now!
 layout: top-title-two-cols
 align: cm-cm-lm
 color: orange-light
-titlewidth: is-5
+columns: is-5
 title: summary
 --- 
 :: title ::
@@ -932,11 +961,11 @@ title: summary
 :: right ::
 
 ### DiracX is in active development
-- Foundations are there, the first release will soon be here
+- We are rewriting the code, but we are keeping Dirac
+- The first release will soon be here
 - DiracX will live together with DIRAC v9 for a while
 - DiracX will ease the interoperability with Rucio and/or any other tool out there
     - DiracX will still have the Data Management part, but its Workload Management functionalities will come first
-
 
 ---
 layout: credits
@@ -1061,5 +1090,3 @@ Q/A
 - What did you use to make these slides?
 
 --> [slidev](https://sli.dev/) with [neversink theme](https://gureckis.github.io/slidev-theme-neversink)
-
-
