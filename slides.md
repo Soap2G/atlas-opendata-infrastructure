@@ -62,13 +62,13 @@ color: gray-light
 ---
 
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 20px;">
-  <img id="Juno" src="/public/images/Juno.jpeg" alt="Juno" style="width: 80px;">
+  <img id="Juno" src="/public/images/Juno.jpeg" alt="Juno" style="width: 70px;">
   <img id="Belle2" src="/public/images/Belle2_logo.png" alt="Belle2" style="width: 80px;">
   <img id="CTA" src="/public/images/CTA.jpg" alt="CTA" style="width: 90px;">
   <img id="fcc" src="/public/images/fcc.png" alt="lz" style="width: 90px;">
   <img id="ilc" src="/public/images/ilc.png" alt="ILC" style="width: 90px;">
   <img id="LHCb" src="/public/images/LHCb.png" alt="LHCb" style="width: 90px;">
-  <img id="BES3" src="/public/images/BES3.png" alt="BES3" style="width: 80px;">
+  <img id="BES3" src="/public/images/BES3.png" alt="BES3" style="width: 75px;">
   <img id="GriPP" src="/public/images/GridPP-Logo.png" alt="gridPP" style="width: 90px;">
   <img id="PA" src="/public/images/pierre-auger-logo.png" alt="pierre-auger" style="width: 70px;">
   <img id="EGI" src="/public/images/EGI.png" alt="EGI" style="width: 90px;">
@@ -122,12 +122,12 @@ layout: side-title
 align: lm-lm
 color: gray-light
 title: WMS
+titlewidth: is-3
 ---
 
 :: title ::
 
-# WMS
-### Workload Management System
+## Workload Management System
 - Pull model based on Pilot jobs
 - Also "Push" solution for HPCs that do not support pilots (because of limited internet access).
 - Will integrate [CWL (Common Workflow Language)](https://www.commonwl.org) as a way of defining jobs (replacing JDL) --> see poster #217
@@ -135,26 +135,53 @@ title: WMS
 :: content ::
 
 ```mermaid
+%%{init: { 'theme': 'default' }}%%
 flowchart LR;
-WMS((WMS))
-    Users-->ProductionSystem;
-    ProductionSystem-->TransformationSystem;
-    TransformationSystem-->WMS;
-    Users-->CLI;
-    Users-->API;
-    Users-->WebApp;
-    CLI-->WMS;
-    API-->WMS;
-    WebApp-->WMS;
-    WMS-->HTCondorCE;
-    WMS-->ARC-AREX;
-    WMS-->IaaS:Clouds;
-    WMS-->SSH;
-    SSH-->HTCondor;
-    SSH-->SLURM;
-    WMS-->HPCs;
-    HPCs-->SLURM;
-    style WMS fill:#bbf
+Jobs["`Users see only **Jobs**`"]
+A@{ shape: sl-rect, label: "APIs" }
+WMS[("`**Workload
+Management
+System**`")]
+style WMS fill:#bbf
+HPC["`High
+Perfomance
+Computers`"]
+style HPC fill:#A145
+clusters["`Computer clusters`"]
+style clusters fill:#A145
+Grid_Nodes["Grid"]
+Pilots["`**Pilots**
+administer computing slots, and match (pull) jobs`"]
+
+style HTCondorCE fill:#F23
+style ARC-AREX fill:#F23
+style libcloud fill:#F23
+style SSH fill:#F23
+style Grid_Nodes fill:#A145
+style Iaas:Clouds fill:#A145
+style HTCondor fill:#F26
+style SLURM fill:#F26
+style Jobs fill:#FFF
+style Pilots fill:#FFF
+
+A-->|jobs|WMS
+
+WMS-->|pilots|libcloud
+WMS-->|pilots|HTCondorCE
+WMS-->|pilots|ARC-AREX
+WMS-. jobs .->HPC
+WMS-->|pilots|SSH
+
+libcloud-->|VMs starting pilots|Iaas:Clouds
+HTCondorCE-->Grid_Nodes
+ARC-AREX-->Grid_Nodes
+ARC-AREX-->HPC
+SSH-->|pilots|SLURM
+SSH-->|pilots|HTCondor
+SSH-->|pilots|clusters
+SLURM-->HPC
+SLURM-->clusters
+HTCondor-->clusters
 ```
 
 ---
@@ -167,8 +194,7 @@ titlewidth: is-5
 
 :: title ::
 
-# DMS
-### Data Management System
+## Data Management System
 It’s about **files**:​ placing, replicating, removing files​
 
 - there are **LFNs** (logical file names)
@@ -180,17 +206,40 @@ It’s about **files**:​ placing, replicating, removing files​
 :: content ::
 
 ```mermaid
+%%{init: { 'theme': 'default' }}%%
 flowchart LR;
-DataManager((DataManager))
-    FileCatalog-->DFC_Service;
-    FileCatalog-->Rucio;
-    FileCatalog-->Transformation_Service;
-    DataManager-->FileCatalog;
-    DataManager-->StorageBase;
-    StorageBase-->SE1;
-    StorageBase-->SE2;
-    StorageBase-->SE3;
-    style FileCatalog fill:#bbf
+A@{ shape: sl-rect, label: "APIs" }
+DMS[("`**Data
+Management
+System**`")]
+style DMS fill:#bbf
+FC[["`**Files
+Catalog**`"]]
+style FC fill:#bbf
+StorageBase[["`**Storage Base**`"]]
+style StorageBase fill:#bbf
+DFC[("`DIRAC
+Files
+Catalog`")]
+Rucio[("Rucio")]
+style Rucio fill:#6001
+TS[("`DIRAC
+Transformation
+System`")]
+WebDav@{ shape: lin-cyl, label: "WebDav (http)" }
+XRootD@{ shape: lin-cyl, label: "XRootD" }
+
+style WebDav fill:#F23A
+style XRootD fill:#F23A
+
+A-->DMS
+DMS-->FC
+DMS-->StorageBase
+FC-->DFC
+FC-->Rucio
+FC-->TS
+StorageBase-->WebDav
+StorageBase-->XRootD
 ```
 
 
@@ -203,7 +252,7 @@ title: TS
 
 :: title ::
 
-# TS (Transformation System)
+## Transformation System
 ### For productions and Dataset management
 
 - A *Data Processing* **transformation** (e.g. Simulation, Merge, DataReconstruction...) creates jobs in the WMS (and re-submit them if needed, eventually destroy them).​
@@ -213,25 +262,38 @@ title: TS
 :: content ::
 
 <span class="bg-cyan-100 text-cyan-600 p-4 border-l-6 border-2 border-cyan-400 rounded-lg pl-8 pr-8 w-full block">
-    The TS is used to automate common tasks related to production activities. It can handle thousands of productions, millions of files and jobs.
+The Transformation System is used to automate common tasks related to production activities. It can handle thousands of productions, millions of files and jobs.
 </span>
 
 &nbsp;
 &nbsp;
 
 ```mermaid
+%%{init: { 'theme': 'default' }}%%
 flowchart LR;
-TransformationSystem((TransformationSystem))
-    Productions_Management-->TransformationSystem;
-    DataSets_Management-->TransformationSystem;
-    TransformationSystem-->WorkloadManagementSystem;
-    WorkloadManagementSystem-->Jobs;
-    WorkloadManagementSystem-->Sites;
-    TransformationSystem-->RequestManagementSystem;
-    RequestManagementSystem-->DMS;
-    DMS-->Catalogs;
-    DMS-->SEs;
-    style TransformationSystem fill:#bbf
+TS[("`**Transformation
+System**`")]
+style TS fill:#bbf
+WMS[("`**Workload
+Management
+System**`")]
+style WMS fill:#bba
+RMS[("`**Request
+Management
+System**`")]
+style RMS fill:#bba
+DMS[("`**Data
+Management
+System**`")]
+style DMS fill:#bba
+PM@{ shape: sl-rect, label: "Productions Management" }
+DM@{ shape: sl-rect, label: "DataSets Management" }
+
+PM-->|Production Definitions|TS
+DM-->|DataSets Operations|TS
+TS-->|Jobs|WMS
+TS-->|Data Operations|RMS
+RMS-->DMS
 ```
 
 ---
@@ -244,7 +306,7 @@ title: DIRAC tech
 
 :: title ::
 
-# Tech stack 
+# DIRAC Tech stack 
 
 :: left :: 
 
@@ -276,7 +338,7 @@ Implemented using `ExtJS`, and fully custom Python "bindings"
 
 ---
 layout: top-title-two-cols
-align: l-lm-lt
+align: c-lm-lt
 color: gray-light
 title: world
 ---
@@ -403,7 +465,7 @@ title: issues
 
 :: title ::
 
-# DIRAC issues
+# DIRAC challenges
 
 :: content ::
 
@@ -658,7 +720,7 @@ title: tokens
 :: content ::
 
 - **Identity (community membership)**: "in transition"
-- **Submitting pilots**: The computing elements right now prefer the tokens (DIRAC v8 does that already)
+- **Submitting pilots**: The computing elements right now prefer the tokens
 - **Data access**: at least in WLCG, proxies. One day, will be token
 - **Verifying a user's identity** (internally to Dirac): 
     - **DiracX** uses only tokens ([link to security model](https://github.com/DIRACGrid/diracx/blob/main/security_model.md))
@@ -911,11 +973,11 @@ titlewidth: is-3
     </li>
 </ul>
 
-**Run the demo:**
+**Run the demo (on your laptop):**
 
 ```sh
 git clone https://github.com/DIRACGrid/diracx-charts
-diracx-charts/run_demo.sh  # do not do it now!
+diracx-charts/run_demo.sh
 ```
  
 
@@ -971,7 +1033,7 @@ title: summary
 layout: credits
 color: navy
 loop: true
-speed: 0.4
+speed: 0.5
 title: credits/people
 ---
 
@@ -987,7 +1049,7 @@ title: credits/people
         Christophe Haen <i>CERN, LHCb</i>
     </div>
     <div class="grid-item text-right mr-4 col-span-1">
-        <strong>Current Developers</strong>
+        <strong>Current Developers/maintainers/supporters</strong>
     </div>
     <div class="grid-item col-span-2">
         Alexandre Boyer <i>CERN, LHCb</i><br/>
@@ -995,8 +1057,13 @@ title: credits/people
         Cedric Serfon <i>Brookhaven National Laboratory (US), Belle2</i><br/>
         Ryunosuke O'Neil <i>CERN, LHCb</i><br/>
         Jorge Lisa Laborda <i>Univ. of Valencia and CSIC (ES), LHCb</i><br/>
+        Daniela Bauer <i>Imperial college (UK), GridPP</i><br/>
+        Simon Fayer <i>Imperial college (UK), GridPP</i><br/>
         Janusz Martyniak <i>Imperial college (UK), GridPP</i><br/>
-        Bertrand Rigaud <i>IN2P3 (FR)</i>
+        Bertrand Rigaud <i>IN2P3 (FR)</i><br/>
+        Luisa Arrabito <i>LUPM (FR), CTA</i><br/>
+        Xiaomei Zhang <i>Beijing, Inst. High Energy Phys. (CN), Juno</i><br/>
+        André Sailer <i>CERN</i>
     </div>
     <div class="grid-item text-right mr-4 col-span-1">
         <strong>Project lead</strong>
@@ -1089,4 +1156,4 @@ Q/A
 
 - What did you use to make these slides?
 
---> [slidev](https://sli.dev/) with [neversink theme](https://gureckis.github.io/slidev-theme-neversink)
+--> [slidev](https://sli.dev/) with [neversink theme](https://gureckis.github.io/slidev-theme-neversink). Diagrams with [mermaid](https://mermaid.js.org)
