@@ -88,6 +88,52 @@ color: gray-light
 layout: top-title
 color: gray-light
 align: l
+title: Extensions
+---
+
+:: title ::
+
+# Action! (and extensions)
+
+:: content ::
+
+Few real life examples, also reported in this conference:
+
+<ul class="text-sm">
+  <li>LHCb stores the metadata and provenance of every produced file in a LHCb-specific database (with an Oracle backend)
+    <ul class="text-xs ml-4">
+      <li>-->
+        <a href="https://indico.cern.ch/event/1338689/contributions/6010069/" class="text-blue-600 hover:underline">see talk in Track 3 on Monday</a> and poster #461 on <code>LbMCSubmit</code>
+      </li>
+    </ul>
+  </li>
+  <li>Belle2 is a HEP experiment. Uses Rucio as a data management solution.
+    <ul class="text-xs ml-4">
+      <li>--> <a href="https://indico.cern.ch/event/1338689/contributions/6010888/" class="text-blue-600 hover:underline">see talk in Track 1 this afternoon</a></li>
+    </ul>
+  </li>
+  <li>CTAO has radically different requirements (compared to HEP experiments) on how to process its data.
+    <ul class="text-xs ml-4">
+      <li>--> <a href="https://indico.cern.ch/event/1338689/contributions/6011028/" class="text-blue-600 hover:underline">see talk in Track 4 tomorrow</a></li>
+    </ul>
+  </li>
+  <li>HERD is an astronomy and particle astrophysics experiment using dHTC for data management.
+    <ul class="text-xs ml-4">
+      <li>--> <a href="https://indico.cern.ch/event/1338689/contributions/6011011/" class="text-blue-600 hover:underline">see talk in Track 4 tomorrow</a></li>
+    </ul>
+  </li>
+  <li>EGI uses DIRAC as WMS, and EGI-CheckIn as an identity provider. Hosts (among others) WeNMR (structural biology and life science)</li>
+</ul>
+
+<SpeechBubble position="t" color='amber' shape="round"  v-drag="[350,430,250,80]">
+DIRAC is coded for being flexible and extendable 
+</SpeechBubble>
+
+
+---
+layout: top-title
+color: gray-light
+align: l
 title: history
 ---
 
@@ -842,58 +888,27 @@ A legacy adaptor moves traffic from DIRAC to DiracX services
 DIRAC services can be removed
 </SpeechBubble>
 
-
-
 ---
 layout: top-title
 color: gray-light
-align: l
-title: Extensions
+align: c
+title: FutureExtensions
 ---
 
 :: title ::
 
-# Action! (and extensions)
+# Future action! (and extensions)
 
 :: content ::
 
 <span class="bg-cyan-100 text-cyan-600 text-center p-4 border-l-6 border-2 border-cyan-400 rounded-lg pl-8 pr-8 w-full block">
-    It is sometimes necessary to extend all Dirac(X) components (including Web and Pilot). 
+    By now, we know that it is sometimes necessary to extend all Dirac(X) components 
     
     DiracX aims to provide an easy way to do so.
 </span>
 
-
-Real life examples, reported in this conference:
-
-<ul class="text-sm">
-  <li>LHCb stores the metadata and provenance of every produced file in a LHCb-specific database (with an Oracle backend)
-    <ul class="text-xs ml-4">
-      <li>-->
-        <a href="https://indico.cern.ch/event/1338689/contributions/6010069/" class="text-blue-600 hover:underline">see talk in Track 3 on Monday</a> and poster #461 on <code>LbMCSubmit</code>
-      </li>
-    </ul>
-  </li>
-  <li>Belle2 is a HEP experiment. Uses Rucio as a data management solution.
-    <ul class="text-xs ml-4">
-      <li>--> <a href="https://indico.cern.ch/event/1338689/contributions/6010888/" class="text-blue-600 hover:underline">see talk in Track 1 this afternoon</a></li>
-    </ul>
-  </li>
-  <li>CTAO has radically different requirements (compared to HEP experiments) on how to process its data.
-    <ul class="text-xs ml-4">
-      <li>--> <a href="https://indico.cern.ch/event/1338689/contributions/6011028/" class="text-blue-600 hover:underline">see talk in Track 4 tomorrow</a></li>
-    </ul>
-  </li>
-  <li>HERD is an astronomy and particle astrophysics experiment using dHTC for data management.
-    <ul class="text-xs ml-4">
-      <li>--> <a href="https://indico.cern.ch/event/1338689/contributions/6011011/" class="text-blue-600 hover:underline">see talk in Track 4 tomorrow</a></li>
-    </ul>
-  </li>
-  <li>EGI uses DIRAC as WMS, and EGI-CheckIn as an identity provider. Hosts (among others) WeNMR (structural biology and life science)</li>
-</ul>
-
-<SpeechBubble position="l" color='amber' shape="round"  v-drag="[800,290,170,140]">
-An Dirac(X)-* extension is provided for reference
+<SpeechBubble position="t" color='amber' shape="round"  v-drag="[400,290,220,140]">
+For DiracX and DiracX-Web we already provide reference extensions
 </SpeechBubble>
 
 
