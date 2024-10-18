@@ -153,10 +153,10 @@ Grid_Nodes["Grid"]
 Pilots["`**Pilots**
 administer computing slots, and match (pull) jobs`"]
 
-style HTCondorCE fill:#F23
-style ARC-AREX fill:#F23
-style libcloud fill:#F23
-style SSH fill:#F23
+style HTCondorCE fill:#F23A
+style ARC-AREX fill:#F23A
+style libcloud fill:#F23A
+style SSH fill:#F23A
 style Grid_Nodes fill:#A145
 style Iaas:Clouds fill:#A145
 style HTCondor fill:#F26
@@ -289,7 +289,7 @@ style DMS fill:#bba
 PM@{ shape: sl-rect, label: "Productions Management" }
 DM@{ shape: sl-rect, label: "DataSets Management" }
 
-PM-->|Production Definitions|TS
+PM-->|Productions Definitions|TS
 DM-->|DataSets Operations|TS
 TS-->|Jobs|WMS
 TS-->|Data Operations|RMS
@@ -430,7 +430,7 @@ We need to ensure business continuity
 
 :: title ::
 
-# Minimal Requirements
+# Minimum Requirements
 
 :: left ::
 
@@ -473,7 +473,7 @@ title: issues
     <li> complex, with high entrance bar</li>
     <li> somewhat cumbersome deployment</li>
     <li> late on “standards”
-        <ul class="text-vs mx-auto">
+        <ul class="text-xs mx-auto">
             <li> No http services</li>
             <li> No tokens</li>
             <li> Old monitoring</li>
@@ -483,6 +483,9 @@ title: issues
     <li> not very developer-friendly: rather un-appealing/confusing, especially for new (and young) developers</li>
     <li> multi-VO, but was not designed to do so since the beginning</li>
     <li> no clear interface to a running DIRAC instance</li>
+        <ul class="text-xs mx-auto">
+            <li> meaning that you need to install a DIRAC client for interacting with DIRAC</li>
+        </ul>
 </ul>
 
 
@@ -491,7 +494,7 @@ layout: section
 color: lime-light
 ---
 
-## We decided that the best of satisfying the requirements was to code a new Dirac
+## We decided that the best way of satisfying the requirements was to code a new Dirac
 
 
 ---
@@ -850,7 +853,7 @@ title: Extensions
 
 :: title ::
 
-# On extending DiracX
+# Action! (and extensions)
 
 :: content ::
 
@@ -861,7 +864,7 @@ title: Extensions
 </span>
 
 
-Examples:
+Real life examples, reported in this conference:
 
 <ul class="text-sm">
   <li>LHCb stores the metadata and provenance of every produced file in a LHCb-specific database (with an Oracle backend)
@@ -889,8 +892,8 @@ Examples:
   <li>EGI uses DIRAC as WMS, and EGI-CheckIn as an identity provider. Hosts (among others) WeNMR (structural biology and life science)</li>
 </ul>
 
-<SpeechBubble position="l" color='amber' shape="round"  v-drag="[840,290,140,140]">
-An extension is provided for reference
+<SpeechBubble position="l" color='amber' shape="round"  v-drag="[800,290,170,140]">
+An Dirac(X)-* extension is provided for reference
 </SpeechBubble>
 
 
@@ -1009,7 +1012,7 @@ diracx-charts/run_demo.sh
 layout: top-title-two-cols
 align: cm-cm-lm
 color: orange-light
-columns: is-5
+columns: is-4
 title: summary
 --- 
 :: title ::
@@ -1022,12 +1025,24 @@ title: summary
 
 :: right ::
 
-### DiracX is in active development
-- We are rewriting the code, but we are keeping Dirac
-- The first release will soon be here
-- DiracX will live together with DIRAC v9 for a while
-- DiracX will ease the interoperability with Rucio and/or any other tool out there
-    - DiracX will still have the Data Management part, but its Workload Management functionalities will come first
+<ul class="text-base">
+  <li>DiracX is "the neXt Dirac incarnation"
+    <ul class="text-sm">
+      <li>We are rewriting the code, but it is still Dirac!</li>
+    </ul>
+  </li>
+  <li>DiracX will ease the interoperability with Rucio and/or any other tool out there
+    <ul class="text-sm">
+      <li>DiracX will still have the Data Management part, but its Workload Management functionalities will come first</li>
+    </ul>
+  </li>
+  <li>The first DiracX release will soon be here
+    <ul class="text-sm">
+      <li>It will live together with DIRAC v9 for a while, until it will replace it completely</li>
+    </ul>
+  </li>
+</ul>
+
 
 ---
 layout: credits
@@ -1049,7 +1064,7 @@ title: credits/people
         Christophe Haen <i>CERN, LHCb</i>
     </div>
     <div class="grid-item text-right mr-4 col-span-1">
-        <strong>Current Developers/maintainers/supporters</strong>
+        <strong>Current Developers, maintainers, supporters</strong>
     </div>
     <div class="grid-item col-span-2">
         Alexandre Boyer <i>CERN, LHCb</i><br/>
@@ -1080,7 +1095,8 @@ title: credits/people
 &nbsp;
 &nbsp;
 &nbsp;
-
+&nbsp;
+&nbsp;
 
 <div class="grid-item col-span-3 text-center mt-180px mb-auto font-size-1.5rem">
     <strong>Questions?</strong>
@@ -1100,6 +1116,8 @@ title: QR
 # QR codes for your fun
 
 # <mdi-arrow-right />
+
+or just click [here (for DiracX web)](https://diracx-cert.app.cern.ch) and [here (for the Web API docs)](https://diracx-cert.app.cern.ch/api/docs)
 
 :: content ::
 
