@@ -17,6 +17,9 @@ October 23rd 2024
 __ <a href="https://indico.cern.ch/event/1338689/" class="ns-c-iconlink"><mdi-open-in-new />CHEP 2024</a>  
 
 
+<!-- 
+Thank you Stephan, and good morning everyone -- > next!
+-->
 
 
 ---
@@ -83,11 +86,15 @@ color: gray-light
 </div>
 
 
+<!-- 
+"the grid is not anymore the grid", so now we just talk about "distributed heteroneous resources", including Grid, Cloud, HPC, etc.
+-->
+
 
 ---
 layout: top-title
 color: gray-light
-align: l
+align: c
 title: Extensions
 ---
 
@@ -133,7 +140,7 @@ DIRAC is coded for being flexible and extendable
 ---
 layout: top-title
 color: gray-light
-align: l
+align: c
 title: history
 ---
 
@@ -390,7 +397,7 @@ title: world
 ---
 
 <StickyNote color="gray-light" textAlign="center" width="260px" title="Dirac should follow these trends" v-drag="[550,380,320,100]">
-What is the best way to achieve keep up with these trends? Can we do it within the current framework?
+What is the best way to keep up with these trends? Can we do it within the current framework?
 </StickyNote>
 
 
@@ -425,13 +432,13 @@ curl -L \
 
 ---
 layout: top-title
-align: lm
+align: c
 color: gray-light
 title: wlcg
 ---
 
 <StickyNote color="gray-light" textAlign="center" width="260px" title="Dirac needs to follow these recommendations" v-drag="[570,400,320,120]">
-What is the best way to achieve keep up with these recommendations? Can we do it within the current framework?
+What is the best way to implement these recommendations? Can we do it within the current framework?
 </StickyNote>
 
 
@@ -617,7 +624,7 @@ DIRAC Web APIs with <devicon-fastapi-wordmark class="text-7xl align-middle inlin
 ---
 layout: top-title
 color: gray-light
-align: lm
+align: c
 title: CLI
 ---
 
@@ -758,7 +765,7 @@ author: 'Some of you out there'
 ---
 layout: top-title
 color: gray-light
-align: lm
+align: c
 title: tokens
 ---
 
@@ -840,7 +847,7 @@ sequenceDiagram
 ---
 layout: top-title
 color: gray-light
-align: l
+align: c
 title: Migration
 ---
 
@@ -932,7 +939,7 @@ titlewidth: is-3
 ---
 layout: top-title
 color: gray-light
-align: l
+align: c
 title: Versions
 ---
 
@@ -1041,7 +1048,7 @@ title: summary
 :: right ::
 
 <ul class="text-base">
-  <li>DiracX is "the neXt Dirac incarnation"
+  <li>DiracX is "the neXt Dirac incarnation", ensuring the future of the widely used Dirac
     <ul class="text-sm">
       <li>We are rewriting the code, but it is still Dirac!</li>
     </ul>
@@ -1117,6 +1124,10 @@ title: credits/people
     <strong>Questions?</strong>
 </div>
 
+<!-- 
+This is not a fully exhastive list (of developers)
+-->
+
 
 ---
 layout: side-title
@@ -1161,7 +1172,7 @@ align: r
 ---
 layout: top-title
 color: gray-light
-align: l
+align: c
 title: FAQ
 ---
 
