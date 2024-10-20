@@ -27,7 +27,7 @@ layout: section
 color: lime-light
 ---
 
-## This is the story of why and how we decided to take a successful project, and rewrite it from scratch
+## This is the story of why and how we decided to take a successful project and rewrite its code from scratch
 
 
 ---
@@ -162,7 +162,7 @@ timeline
                     : the current DIRAC framework is still based on this work
         section Open sourced, wider adoption
           2008 : Large-ish reshuffling to become multi-VO
-               : LHCbDIRAC extension separated from Vanilla DIRAC code
+               : LHCbDIRAC extension separated from core DIRAC code
           2009 : CLIC community adopts DIRAC
           2011 : France-Grilles is the first multi-VO DIRAC installation
           2012 : Belle2, BES3, CTA adopt DIRAC
@@ -253,7 +253,7 @@ It’s about **files**:​ placing, replicating, removing files​
 - there are **LFNs** (logical file names)
 - **LFNs** are registered in *catalog(s)​*
     - where are the LFNs? (in the DIRAC File Catalog (DFC), or in Rucio)​
-    - what are their metadata? (in the DFC, or in the LHCb Bookkeeping, or in AMGA)​
+    - where are their metadata? (in the DFC, or in the LHCb Bookkeeping, or in AMGA)​
 - LFNs *may* have **PFNs** (physical file names), stored in **SEs** (Storage Elements), that can be accessed with several protocols.​
 
 :: content ::
@@ -308,7 +308,7 @@ title: TS
 ## Transformation System
 ### For productions and Dataset management
 
-- A *Data Processing* **transformation** (e.g. Simulation, Merge, DataReconstruction...) creates jobs in the WMS (and re-submit them if needed, eventually destroy them).​
+- A *Data Processing* **transformation** (e.g. Simulation, Merge, DataReconstruction...) creates jobs in the WMS (and re-submits them if needed, eventually destroys them).​
 
 - A *Data Manipulation* **transformation** replicates, or removes, data from storage elements.
 
@@ -535,10 +535,11 @@ title: issues
     <li> "old"-ish design (RPC, "cron" agents...)</li>
     <li> not very developer-friendly: rather un-appealing/confusing, especially for new (and young) developers</li>
     <li> multi-VO, but was not designed to do so since the beginning</li>
-    <li> no clear interface to a running DIRAC instance</li>
+    <li> a custom interface is needed to interact with a running DIRAC instance
         <ul class="text-xs mx-auto">
             <li> meaning that you need to install a DIRAC client for interacting with DIRAC</li>
         </ul>
+    </li>
 </ul>
 
 
@@ -758,9 +759,95 @@ authorsize: text-s
 author: 'Some of you out there'
 ---
 
-"OK, but there are several communities using DIRAC right now.
+"OK, but there are several communities using DIRAC right now. How do they migrate?"
 
-"Also, the Grid still uses proxies. VOMS is alive!"
+---
+layout: top-title
+color: gray-light
+align: c
+title: Migration
+---
+
+:: title ::
+
+### Business continuity for DIRAC communities is our top priority
+Services of DIRAC v9 and DiracX will need to live together for some time
+
+
+:: content ::
+
+<Arrow x1="300" y1="170" x2="370" y2="170" />
+<Line :x1=345 :y1=200 :x2=345 :y2=500 :width=1 />
+
+<Arrow x1="610" y1="170" x2="680" y2="170" />
+<Line :x1=633 :y1=200 :x2=633 :y2=500 :width=1 />
+
+<div style="display: flex; align-items: center; justify-content: center;">
+    <img id="D_X" src="/public/images/legacy_before_Adaptor.png" class="mx-auto w-1/4"> </img>
+    <img id="D_Ad" src="/public/images/legaxyAdaptor.png" class="mx-auto w-1/4"> </img>
+    <img id="X" src="/public/images/legacy_after_Adaptor.png" class="mx-auto w-1/4"> </img>
+</div>
+
+<SpeechBubble position="r" color='cyan' shape="round"  v-drag="[100,350,40,60]">
+1
+</SpeechBubble>
+
+<SpeechBubble position="r" color='cyan' shape="round"  v-drag="[370,350,40,60]">
+2
+</SpeechBubble>
+
+<SpeechBubble position="r" color='cyan' shape="round"  v-drag="[660,350,40,60]">
+3
+</SpeechBubble>
+
+<SpeechBubble position="t" color='amber' shape="round"  v-drag="[160,350,120,180]">
+DIRAC and DiracX share the databases
+</SpeechBubble>
+
+<SpeechBubble position="t" color='amber' shape="round"  v-drag="[430,350,160,180]">
+A legacy adaptor moves traffic from DIRAC to DiracX services
+</SpeechBubble>
+
+<SpeechBubble position="t" color='amber' shape="round"  v-drag="[720,350,120,140]">
+DIRAC services can be removed
+</SpeechBubble>
+
+---
+layout: top-title
+color: gray-light
+align: c
+title: FutureExtensions
+---
+
+:: title ::
+
+# Future action! (and extensions)
+
+:: content ::
+
+<span class="bg-cyan-100 text-cyan-600 text-center p-4 border-l-6 border-2 border-cyan-400 rounded-lg pl-8 pr-8 w-full block">
+    By now, we know that it is sometimes necessary to extend all Dirac(X) components 
+    
+    DiracX aims to provide an easy way to do so.
+</span>
+
+<SpeechBubble position="t" color='amber' shape="round"  v-drag="[400,290,220,140]">
+For DiracX and DiracX-Web we already provide reference extensions
+</SpeechBubble>
+
+
+---
+layout: quote
+color: sky-light
+quotesize: text-m
+authorsize: text-s
+author: 'Again, some of you out there'
+---
+
+
+"You have shown tokens-based authorizations for DiracX. But the Grid still uses proxies. 
+
+VOMS is alive!"
 
 ---
 layout: top-title
@@ -842,81 +929,6 @@ sequenceDiagram
 ```
 
 <Line :x1=420 :y1=120 :x2=420 :y2=520 :width=1 />
-
-
----
-layout: top-title
-color: gray-light
-align: c
-title: Migration
----
-
-:: title ::
-
-### Business continuity for DIRAC communities is our top priority
-Services of DIRAC v9 and DiracX will need to live together for some time
-
-
-:: content ::
-
-<Arrow x1="300" y1="170" x2="370" y2="170" />
-<Line :x1=345 :y1=200 :x2=345 :y2=500 :width=1 />
-
-<Arrow x1="610" y1="170" x2="680" y2="170" />
-<Line :x1=633 :y1=200 :x2=633 :y2=500 :width=1 />
-
-<div style="display: flex; align-items: center; justify-content: center;">
-    <img id="D_X" src="/public/images/legacy_before_Adaptor.png" class="mx-auto w-1/4"> </img>
-    <img id="D_Ad" src="/public/images/legaxyAdaptor.png" class="mx-auto w-1/4"> </img>
-    <img id="X" src="/public/images/legacy_after_Adaptor.png" class="mx-auto w-1/4"> </img>
-</div>
-
-<SpeechBubble position="r" color='cyan' shape="round"  v-drag="[100,350,40,60]">
-1
-</SpeechBubble>
-
-<SpeechBubble position="r" color='cyan' shape="round"  v-drag="[370,350,40,60]">
-2
-</SpeechBubble>
-
-<SpeechBubble position="r" color='cyan' shape="round"  v-drag="[660,350,40,60]">
-3
-</SpeechBubble>
-
-<SpeechBubble position="t" color='amber' shape="round"  v-drag="[160,350,120,180]">
-DIRAC and DiracX share the databases
-</SpeechBubble>
-
-<SpeechBubble position="t" color='amber' shape="round"  v-drag="[430,350,160,180]">
-A legacy adaptor moves traffic from DIRAC to DiracX services
-</SpeechBubble>
-
-<SpeechBubble position="t" color='amber' shape="round"  v-drag="[720,350,120,140]">
-DIRAC services can be removed
-</SpeechBubble>
-
----
-layout: top-title
-color: gray-light
-align: c
-title: FutureExtensions
----
-
-:: title ::
-
-# Future action! (and extensions)
-
-:: content ::
-
-<span class="bg-cyan-100 text-cyan-600 text-center p-4 border-l-6 border-2 border-cyan-400 rounded-lg pl-8 pr-8 w-full block">
-    By now, we know that it is sometimes necessary to extend all Dirac(X) components 
-    
-    DiracX aims to provide an easy way to do so.
-</span>
-
-<SpeechBubble position="t" color='amber' shape="round"  v-drag="[400,290,220,140]">
-For DiracX and DiracX-Web we already provide reference extensions
-</SpeechBubble>
 
 
 ---
@@ -1050,7 +1062,7 @@ title: summary
 <ul class="text-base">
   <li>DiracX is "the neXt Dirac incarnation", ensuring the future of the widely used Dirac
     <ul class="text-sm">
-      <li>We are rewriting the code, but it is still Dirac!</li>
+      <li>We are rewriting the code, but it is still Dirac that you love!</li>
     </ul>
   </li>
   <li>DiracX will ease the interoperability with Rucio and/or any other tool out there
