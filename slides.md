@@ -1065,7 +1065,7 @@ title: summary
       <li>We are rewriting the code, but it is still Dirac that you love!</li>
     </ul>
   </li>
-  <li>DiracX will ease the interoperability with Rucio and/or any other tool out there
+  <li>DiracX will ease the interoperability with Rucio and/or dask and/or any other tool out there
     <ul class="text-sm">
       <li>DiracX will still have the Data Management part, but its Workload Management functionalities will come first</li>
     </ul>
@@ -1194,7 +1194,7 @@ Q/A
 
 :: content ::
 
-- I am using {Rucio|AnotherTool}. I could use DiracX as WMS but do not want to fiddle with DIRAC
+- I am using {Rucio|dask|another_tool}. I could use DiracX as WMS but do not want to fiddle with DIRAC
 
 --> It will probably be possible, but we do not know when.
 
