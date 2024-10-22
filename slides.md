@@ -268,8 +268,7 @@ DMS[("`**Data
 Management
 System**`")]
 style DMS fill:#bbf
-FC[["`**Files
-Catalog**`"]]
+FC[["`**Catalog**`"]]
 style FC fill:#bbf
 StorageBase[["`**Storage Base**`"]]
 style StorageBase fill:#bbf
@@ -296,6 +295,10 @@ FC-->TS
 StorageBase-->WebDav
 StorageBase-->XRootD
 ```
+
+<!-- 
+A catalog is effectively an interface, that needs implementation. Such implementation can be the DIRAC Files Catalog, or Rucio, or any other, including extension specific ones
+-->
 
 
 ---
@@ -378,7 +381,7 @@ Dashboards can be created within the DIRAC Web App:
 
 and/or in Grafana:
 
-<img src="/public/images/running_jobs_90.png" alt="DIRAC_stack" class="mx-auto w-2/3"/>
+<img src="/public/images/running_jobs_90.png" alt="DIRAC_stack" class="mx-auto w-4/5"/>
 
 
 ---
@@ -391,28 +394,29 @@ title: DIRAC tech
 
 :: title ::
 
-# DIRAC Tech stack 
+# Technicalities
 
 :: content :: 
 
 <ul class="text-sm">
-  <li>DIRAC is written in python 3
-    <ul class="text-xs">
-      <li>with the Pilot code supporting Python 2.7</li>
-    </ul>
-  </li>
+  <li>DIRAC is written in python 3 (the Pilot still supports Python 2.7)</li>
   <li>Services are exposed at urls like <code>dips://box.some.where:9132/WorloadManagement/</code>
     <ul class="text-xs">
       <li><code>dips</code> stands for "DIRAC protocol"</li>
     </ul>
   </li>
-  <li>The DIRAC framework provides also "Agents" (~ cron jobs) and "Executors" (~  ) to animate the system</li>
+  <li>The DIRAC framework provides also "Agents" (~ cron jobs) and "Executors" (~ tasks execution) to animate the system</li>
   <li>As backends, <logos-mysql class="text-2xl align-middle inline-block mx-0"></logos-mysql> and <logos:opensearch class="text-1xl align-middle inline-block mx-0"></logos:opensearch> are supported (for different purposes)</li>
-  <li>The Web App is implemented using `ExtJS`, and fully custom Python "bindings"</li>
+  <li>The Web App is implemented using <code>ExtJS</code>, and fully custom Python "bindings"</li>
+  <li>For its internal AuthN/Z, DIRAC understands certificates and proxies
+    <ul class="text-xs">
+      <li>VOMS (Virtual Organization Membership Service) is effectively a hard DIRAC dependency</li>
+    </ul>
+  </li>
 </ul>
 
 
-<img src="/public/images/DIRAC_stack.png" alt="DIRAC_stack" class="mx-auto w-2/3"/>
+<img src="/public/images/DIRAC_stack.png" alt="DIRAC_stack" class="mx-auto w-3/5 h-1/2"/>
 
 
 ---
