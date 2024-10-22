@@ -88,6 +88,8 @@ color: gray-light
 
 <!-- 
 "the grid is not anymore the grid", so now we just talk about "distributed heteroneous resources", including Grid, Cloud, HPC, etc.
+
+I realised the other day that we do not explain well enough what "multi-VO" means: it means that DIRAC (and so "the grid") is offered "as a service", and this is a great solution for small and medium sized VOs
 -->
 
 
@@ -831,7 +833,16 @@ title: FutureExtensions
     DiracX aims to provide an easy way to do so.
 </span>
 
-<SpeechBubble position="t" color='amber' shape="round"  v-drag="[400,290,220,140]">
+
+```toml
+# entrypoints in pyproject.toml
+
+[project.entry-points."diracx.db.sql"]
+AuthDB = "diracx.db.sql:AuthDB"
+JobDB = "<extension>.db.sql:ExtendedJobDB"
+```
+
+<SpeechBubble position="t" color='amber' shape="round"  v-drag="[400,310,220,140]">
 For DiracX and DiracX-Web we already provide reference extensions
 </SpeechBubble>
 
@@ -1014,7 +1025,7 @@ titlewidth: is-3
 
 ```sh
 git clone https://github.com/DIRACGrid/diracx-charts
-diracx-charts/run_demo.sh
+diracx-charts/run_demo.sh # this is run for each and every commit in Github Actions
 ```
  
 
@@ -1213,3 +1224,23 @@ Q/A
 - What did you use to make these slides?
 
 --> [slidev](https://sli.dev/) with [neversink theme](https://gureckis.github.io/slidev-theme-neversink). Diagrams with [mermaid](https://mermaid.js.org)
+
+
+---
+layout: top-title
+color: gray-light
+align: c
+title: tests
+---
+
+:: title :: 
+
+# Testing
+
+:: content ::
+
+- we use Github Actions "massively"
+- our Integration tests create a "grid-in-a-box":
+  - run DIRAC and DiracX servers, including databases
+  - run ancillary services (e.g. IdP, CA)
+  - authenticate, submit pilots, match and run jobs, upload files, etc
