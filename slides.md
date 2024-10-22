@@ -353,7 +353,37 @@ RMS-->DMS
 
 ---
 layout: top-title-two-cols
-align: c-lm-lm
+align: c-ct-ct
+color: gray-light
+title: Web
+---
+
+
+:: title ::
+
+# Visualizations 
+
+:: left :: 
+
+DIRAC also provides a WebApp: 
+
+![](/public/images/WebApp.png)
+
+:: right ::
+
+Dashboards can be created within the DIRAC Web App:
+
+
+<img src="/public/images/LHCb_dashboard.png" alt="DIRAC_stack" class="mx-auto w-2/3"/>
+
+and/or in Grafana:
+
+<img src="/public/images/running_jobs_90.png" alt="DIRAC_stack" class="mx-auto w-2/3"/>
+
+
+---
+layout: top-title
+align: c
 color: gray-light
 title: DIRAC tech
 ---
@@ -363,7 +393,7 @@ title: DIRAC tech
 
 # DIRAC Tech stack 
 
-:: left :: 
+:: content :: 
 
 <ul class="text-sm">
   <li>DIRAC is written in python 3
@@ -376,20 +406,14 @@ title: DIRAC tech
       <li><code>dips</code> stands for "DIRAC protocol"</li>
     </ul>
   </li>
-  <li>The DIRAC framework provides also "Agents" and "Executors" to animate the system</li>
+  <li>The DIRAC framework provides also "Agents" (~ cron jobs) and "Executors" (~  ) to animate the system</li>
   <li>As backends, <logos-mysql class="text-2xl align-middle inline-block mx-0"></logos-mysql> and <logos:opensearch class="text-1xl align-middle inline-block mx-0"></logos:opensearch> are supported (for different purposes)</li>
+  <li>The Web App is implemented using `ExtJS`, and fully custom Python "bindings"</li>
 </ul>
 
 
-![](/public/images/DIRAC_stack.png)
+<img src="/public/images/DIRAC_stack.png" alt="DIRAC_stack" class="mx-auto w-2/3"/>
 
-:: right ::
-
-DIRAC also provides a WebApp: 
-
-![](/public/images/WebApp.png)
-
-Implemented using `ExtJS`, and fully custom Python "bindings"
 
 ---
 layout: top-title-two-cols
