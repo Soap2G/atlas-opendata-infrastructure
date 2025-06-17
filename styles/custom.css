@@ -1,0 +1,19 @@
+p {
+    font-size: 0.8rem;
+  }
+
+ul {
+    font-size: 0.7rem;
+  }
+
+li {
+    line-height: 0.5em;
+  }
+
+pre {
+    /* This is the magic property that enables wrapping */
+    white-space: pre-wrap;
+
+    /* This helps break very long strings without spaces */
+    word-break: break-all;
+}
