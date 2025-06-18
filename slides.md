@@ -542,7 +542,7 @@ slide_info: true
 #### An ecosystem that gives you access to compute, storage and processing power.
 <br/>
 
-##### 4. **[GoeDrid at Göttingen](https://punchlogin.goegrid.gwdg.de/)**:
+##### 4. **[GoeGrid at Göttingen](https://punchlogin.goegrid.gwdg.de/)**:
 *The Göttingen facility for analysis*
 
 <br/>
