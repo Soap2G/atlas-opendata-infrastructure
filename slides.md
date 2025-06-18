@@ -18,6 +18,21 @@ __ <a href="https://indico.cern.ch/event/1554997/" class="ns-c-iconlink"><mdi-op
 
 
 ---
+layout: section
+color: blue-light
+---
+
+## The ATLAS Open What?
+Have a look to [Eirik's latest and greatest news about our project](https://indico.cern.ch/event/1535047/timetable/#43-recent-releases-of-atlas-op)
+
+
+## Ok, but what Open Data?
+You already know that, have a look to [Mariana's presentation](https://indico.cern.ch/event/1554997/#23-datasets)
+
+## Cool, but what if I need help?
+Good question, for anything feel free to [contact us](https://opendata.atlas.cern/contact-us)
+
+---
 layout: section 
 color: blue-light
 ---
@@ -27,23 +42,47 @@ color: blue-light
     <img id="DIRAC" src="https://gitlab.cern.ch/atlas-outreach-data-tools/atlas-open-data-website-v2/-/raw/85f4a3d2ce31e10f1d80db5a2bae1f272cd183f8/src/pages/collision.gif" alt="ATLAS logo">
 </div>
 
-
-
-
 ---
-layout: section
-color: indigo-light
+layout: quote
+color: blue-light
+quotesize: text-m
+authorsize: text-s
+author: 'Most of our high school students'
 ---
 
-## But what is ATLAS Open Data?
-You already know that, have a look to [Mariana's presentation](https://indico.cern.ch/event/1554997/#23-datasets)
+## Level  0
+
+"Where do I start?"
+---
+layout: side-title
+side: r
+titlewidth: is-3
+color: blue-light
+title: Interactive analysis 2
+slide_info: true
+align: lt
+---
+
+:: title :: 
+## Our website
+
+Have a look at this, there's everything you need!
+
+<-- [Get Started](https://opendata.atlas.cern/docs/category/get-started)
+
+:: content :: 
+
+ <div style="width: 650px; position: relative; overflow: hidden;">
+ <iframe width="103%" height="550" style="border:none; margin-left: 0px; display: block;" src="https://opendata.atlas.cern/docs/category/get-started" frameborder="0" allowfullscreen></iframe>
+</div>
+
 
 ---
 layout: quote
 color: indigo-light
 quotesize: text-m
 authorsize: text-s
-author: 'Most of our high school students'
+author: 'Still most of our high school students'
 ---
 
 ## Level  1
@@ -70,7 +109,7 @@ No technical knowledge required ✅
 
 Introduction to the studied process ✅
 
-Step-by-step explanation ⚠️
+Step-by-step explanation ✅
 
 Advanced contents ❌
 
@@ -107,7 +146,7 @@ slide_info: true
 ---
 
 :: title :: 
-## The Open Data teanchers' workshop
+## The Open Data teachers' workshop
 <br/>
 
 ##### Introduction to ATLAS Open Data, with particle physics and programming basic concepts.
@@ -176,9 +215,10 @@ align: lt
 
 ⚠️ Research topics (coming soon!)
 
+<p style="font-size: 0.6rem"> Check out our <a href="https://opendata.atlas.cern/docs/tutresearch/physlitetut">PHYSLITE tutorial</a> for starters</p>
 <br/>
 
-<-- Here you have some new notebooks from our latest release. See [Gianni's presentation](https://indico.cern.ch/event/1554997/#30-example-notebook-walkthroug) for more!
+<-- Here you have some new notebooks from our latest release. See [Giannis' presentation](https://indico.cern.ch/event/1554997/#30-example-notebook-walkthroug) for more!
 
 :: content :: 
 
@@ -239,7 +279,7 @@ author: 'Could be anyone before today'
 layout: two-cols-title
 columns: is-6
 color: rose-light
-title: Docker
+title: atlasopenmagic
 slide_info: true
 ---
 
@@ -415,7 +455,7 @@ Download and install Docker from the [official website](https://docs.docker.com/
 ##### 2.  **Run the Docker Image** 
 Open your terminal and run the Docker image, available on our [GitHub registry](https://github.com/atlas-outreach-data-tools/notebooks-collection-opendata/pkgs/container/notebooks-collection-opendata).
 ```sh
-docker run -it -p 8888:8888 -v my_volume:/home/jovyan/work ghcr.io/atlas-outreach-data-tools/notebooks-collection-opendata:latest
+docker run -it -p 8888:8888 -v my_opendata_notebooks_cloned_repo:/home/jovyan/work ghcr.io/atlas-outreach-data-tools/notebooks-collection-opendata:latest
 ```
 <br/>
 
@@ -484,8 +524,66 @@ slide_info: true
 
 <br/>
 
-##### 3. **Anything else you have**:
-Our Docker image is modular and can be used easily, contact you admins (and get back to us for help if needed)!
+##### 3. **Other Analysis  Facilities** (account restrictions may apply):
+Like [UChicago](https://af.uchicago.edu/), and many others! Our Docker image is modular and can be used easily, contact you admins!
+
+---
+layout: section
+columns: is-6
+color: orange-light
+title: Analysis Facilities
+slide_info: true
+---
+
+# Analysis Facilities 🛠️
+
+<br/>
+
+#### An ecosystem that gives you access to compute, storage and processing power.
+<br/>
+
+##### 4. **[GoeDrid at Göttingen](https://punchlogin.goegrid.gwdg.de/)**:
+*The Göttingen facility for analysis*
+
+<br/>
+<div class="grid grid-cols-2 gap-4">
+  <div>
+    <AdmonitionType title='It is a batch service' type='tip' >
+    Software stack, storage and compute available via HTCondor
+    </AdmonitionType>
+  </div>
+
+  <div>
+    <AdmonitionType title='It is a batch service' type='caution' >
+    Does not support interactive analysis
+    </AdmonitionType>
+  </div>
+</div>
+
+<br/>
+
+##### 5. **Clouds**:
+*Pay to win*
+
+<br/>
+<div class="grid grid-cols-2 gap-4">
+  <div>
+    <AdmonitionType title='Unlimited power' type='tip' >
+    Just give me your credit card
+    </AdmonitionType>
+  </div>
+
+  <div>
+    <AdmonitionType title='Compute is not cheap these days' type='caution' >
+    Be careful of your resource usage, <a href="https://arstechnica.com/information-technology/2024/04/aws-s3-storage-bucket-with-unlucky-name-nearly-cost-developer-1300/">the bill can explode</a>.
+    </AdmonitionType>
+  </div>
+</div>
+
+<br/>
+
+##### 3. **High Performance Computing (HPC) Centres**:
+If you manage to have access to one of those, please write us!!
 
 
 ---
@@ -504,6 +602,7 @@ title: credits/people
         <strong>Useful links</strong>
     </div>
     <div class="grid-item col-span-2">
+        <a href="https://github.com/Soap2G/atlas-opendata-infrastructure">This presentation source code</a><br/>
         <a href="https://indico.cern.ch/event/1554997">This meeting</a><br/>
         <a href="https://opendata.atlas.cern">The ATLAS Open Data website</a><br/>
         <a href="https://atlas4teachers.app.cern.ch">The ATLAS Open Data teacher's workshop</a><br/>
@@ -530,8 +629,11 @@ title: credits/people
         University of Sussex<br/>
         University of Trieste<br/>
         University of Udine<br/>
-        <i>...and many more</i>
+        <i>...and <a href="https://opendata.atlas.cern/externals">many more</a> </i>
       </div>
+      <div class="grid-item text-center mr-0- col-span-3">
+        <i>Special thanks to Federico Stagni for the <a href="https://sli.dev/">slidev</a> idea</i>
+    </div>
 </div>
 
 &nbsp;
